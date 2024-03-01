@@ -3,10 +3,7 @@
 
 ### IMPORTS ###
 
-import json
-import requests
 import reflex as rx
-import myipaddress as myip
 
 from .navbar import navbar
 from .ip_address import ip_address_page

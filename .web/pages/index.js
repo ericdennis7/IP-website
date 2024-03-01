@@ -61,17 +61,17 @@ export default function Component() {
 </RadixThemesContainer>
   <RadixThemesContainer css={{"backgroundColor": "#f4f5f8"}}>
   <RadixThemesFlex align={`start`} css={{"backgroundColor": "#f4f5f8"}} direction={`row`} gap={`2`}>
-  <RadixThemesLink asChild={true} css={{"backgroundColor": "white", "padding": "10px", "borderRadius": "7px 7px 0px 0px"}}>
+  <RadixThemesLink asChild={true} css={{"color": "black", "backgroundColor": "white", "padding": "15px", "borderRadius": "7px 7px 0px 0px"}}>
   <NextLink href={`https://reflex.dev`} passHref={true}>
   {`My IP Address`}
 </NextLink>
 </RadixThemesLink>
-  <RadixThemesLink asChild={true} css={{"backgroundColor": "white", "padding": "10px", "borderRadius": "7px 7px 0px 0px"}}>
+  <RadixThemesLink asChild={true} css={{"color": "black", "backgroundColor": "hsla(0,0%,100%,.5)", "padding": "15px", "borderRadius": "7px 7px 0px 0px"}}>
   <NextLink href={`https://reflex.dev`} passHref={true}>
   {`My Global Ping`}
 </NextLink>
 </RadixThemesLink>
-  <RadixThemesLink asChild={true} css={{"backgroundColor": "white", "padding": "10px", "borderRadius": "7px 7px 0px 0px"}}>
+  <RadixThemesLink asChild={true} css={{"color": "black", "backgroundColor": "hsla(0,0%,100%,.5)", "padding": "15px", "borderRadius": "7px 7px 0px 0px"}}>
   <NextLink href={`https://reflex.dev`} passHref={true}>
   {`Track My Packet`}
 </NextLink>
