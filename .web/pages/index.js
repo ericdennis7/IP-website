@@ -184,24 +184,22 @@ export default function Component() {
 </Box>
 </RadixThemesContainer>
 </RadixThemesFlex>
-  <RadixThemesFlex css={{"display": "flex", "alignItems": "center", "justifyContent": "center"}}>
-  <RadixThemesContainer>
+  <RadixThemesContainer css={{"padding": "1em"}}>
   <RadixThemesHeading size={`7`}>
   {`What's an IP address?`}
 </RadixThemesHeading>
   <RadixThemesContainer css={{"height": "5px"}}/>
-  <RadixThemesText as={`p`}>
+  <RadixThemesText as={`p`} css={{"wrap": "wrap"}}>
   {`
-                An IP (Internet Protocol) address serves as a numerical label assigned to each device connected to a computer network
-                that uses the Internet Protocol for communication. It functions much like a home address in the digital realm. 
-                When data is sent over the internet, it gets divided into packets, and each packet contains both the sender's and receiver's 
-                IP addresses. These addresses ensure that the data reaches the correct destination, allowing devices to communicate and share 
-                information across the vast network of interconnected computers that make up the internet. In essence, IP addresses play a 
-                fundamental role in facilitating the routing and delivery of data between different devices on the internet.
-                `}
+            An IP (Internet Protocol) address serves as a numerical label assigned to each device connected to a computer network
+            that uses the Internet Protocol for communication. It functions much like a home address in the digital realm. 
+            When data is sent over the internet, it gets divided into packets, and each packet contains both the sender's and receiver's 
+            IP addresses. These addresses ensure that the data reaches the correct destination, allowing devices to communicate and share 
+            information across the vast network of interconnected computers that make up the internet. In essence, IP addresses play a 
+            fundamental role in facilitating the routing and delivery of data between different devices on the internet.
+            `}
 </RadixThemesText>
 </RadixThemesContainer>
-</RadixThemesFlex>
 </Fragment>
   <NextHead>
   <title>

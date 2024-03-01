@@ -196,20 +196,19 @@ def index() -> rx.Component:
     ),
         
     # LEARNING ABOUT IP ADDRESSES
-    rx.center(
-        rx.container(
-            rx.heading("What's an IP address?", size="7"),
-            rx.container(height="5px"),
-            rx.text("""
-                An IP (Internet Protocol) address serves as a numerical label assigned to each device connected to a computer network
-                that uses the Internet Protocol for communication. It functions much like a home address in the digital realm. 
-                When data is sent over the internet, it gets divided into packets, and each packet contains both the sender's and receiver's 
-                IP addresses. These addresses ensure that the data reaches the correct destination, allowing devices to communicate and share 
-                information across the vast network of interconnected computers that make up the internet. In essence, IP addresses play a 
-                fundamental role in facilitating the routing and delivery of data between different devices on the internet.
-                """
-                ),
-            ),
+    rx.container(
+        rx.heading("What's an IP address?", size="7"),
+        rx.container(height="5px"),
+        rx.text("""
+            An IP (Internet Protocol) address serves as a numerical label assigned to each device connected to a computer network
+            that uses the Internet Protocol for communication. It functions much like a home address in the digital realm. 
+            When data is sent over the internet, it gets divided into packets, and each packet contains both the sender's and receiver's 
+            IP addresses. These addresses ensure that the data reaches the correct destination, allowing devices to communicate and share 
+            information across the vast network of interconnected computers that make up the internet. In essence, IP addresses play a 
+            fundamental role in facilitating the routing and delivery of data between different devices on the internet.
+            """,
+            wrap="wrap"),
+        padding="1em"
         ),
     )
 
