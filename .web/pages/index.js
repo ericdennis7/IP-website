@@ -1,51 +1,18 @@
 /** @jsxImportSource @emotion/react */
 
 
-import { Fragment, useContext } from "react"
-import { EventLoopContext } from "/utils/context"
-import { Event, getBackendURL, isTrue } from "/utils/state"
-import { Button as RadixThemesButton, Card as RadixThemesCard, Container as RadixThemesContainer, Dialog as RadixThemesDialog, DropdownMenu as RadixThemesDropdownMenu, Flex as RadixThemesFlex, Heading as RadixThemesHeading, Link as RadixThemesLink, Separator as RadixThemesSeparator, Strong as RadixThemesStrong, Text as RadixThemesText, Tooltip as RadixThemesTooltip } from "@radix-ui/themes"
-import env from "/env.json"
+import { Fragment } from "react"
+import { Button as RadixThemesButton, Card as RadixThemesCard, Container as RadixThemesContainer, DropdownMenu as RadixThemesDropdownMenu, Flex as RadixThemesFlex, Heading as RadixThemesHeading, Link as RadixThemesLink, Separator as RadixThemesSeparator, Strong as RadixThemesStrong, Text as RadixThemesText, Tooltip as RadixThemesTooltip } from "@radix-ui/themes"
 import NextLink from "next/link"
 import { Box } from "@chakra-ui/react"
 import NextHead from "next/head"
 
 
 
-export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
-
-
-  return (
-    <Fragment>
-  {isTrue(connectError !== null) ? (
-  <Fragment>
-  <RadixThemesDialog.Root open={connectError !== null}>
-  <RadixThemesDialog.Content>
-  <RadixThemesDialog.Title>
-  {`Connection Error`}
-</RadixThemesDialog.Title>
-  <RadixThemesText as={`p`}>
-  {`Cannot connect to server: `}
-  {(connectError !== null) ? connectError.message : ''}
-  {`. Check if server is reachable at `}
-  {getBackendURL(env.EVENT).href}
-</RadixThemesText>
-</RadixThemesDialog.Content>
-</RadixThemesDialog.Root>
-</Fragment>
-) : (
-  <Fragment/>
-)}
-</Fragment>
-  )
-}
-
 export default function Component() {
 
   return (
     <Fragment>
-  <Fragment_1762bb90abdb81b879b2a22edbbe01a1/>
   <Fragment>
   <RadixThemesFlex align={`center`} css={{"position": "fixed", "top": "0px", "backgroundColor": "white", "padding": "1em", "height": "4em", "width": "100%", "zIndex": "5", "borderBottom": "0.1px solid #eae7ec"}} direction={`row`} gap={`2`}>
   <RadixThemesFlex align={`start`} direction={`row`} gap={`2`}>
@@ -86,10 +53,30 @@ export default function Component() {
 </RadixThemesDropdownMenu.Root>
 </RadixThemesFlex>
 </RadixThemesFlex>
+  <Fragment>
   <RadixThemesContainer css={{"backgroundColor": "#f4f5f8", "padding": "50px 1em 100px 1em"}}>
   <RadixThemesHeading align={`left`} css={{"marginTop": "10vh"}} size={`9`}>
   {`What's my IP address?`}
 </RadixThemesHeading>
+</RadixThemesContainer>
+  <RadixThemesContainer css={{"backgroundColor": "#f4f5f8"}}>
+  <RadixThemesFlex align={`start`} css={{"backgroundColor": "#f4f5f8"}} direction={`row`} gap={`2`}>
+  <RadixThemesLink asChild={true} css={{"backgroundColor": "white", "padding": "10px", "borderRadius": "7px 7px 0px 0px"}}>
+  <NextLink href={`https://reflex.dev`} passHref={true}>
+  {`My IP Address`}
+</NextLink>
+</RadixThemesLink>
+  <RadixThemesLink asChild={true} css={{"backgroundColor": "white", "padding": "10px", "borderRadius": "7px 7px 0px 0px"}}>
+  <NextLink href={`https://reflex.dev`} passHref={true}>
+  {`My Global Ping`}
+</NextLink>
+</RadixThemesLink>
+  <RadixThemesLink asChild={true} css={{"backgroundColor": "white", "padding": "10px", "borderRadius": "7px 7px 0px 0px"}}>
+  <NextLink href={`https://reflex.dev`} passHref={true}>
+  {`Track My Packet`}
+</NextLink>
+</RadixThemesLink>
+</RadixThemesFlex>
 </RadixThemesContainer>
   <RadixThemesFlex align={`center`} css={{"height": "50vh", "margin": "1em", "border": "none", "inset": "0", "display": "flex", "alignItems": "center", "justifyContent": "center"}}>
   <RadixThemesContainer css={{"border": "none", "inset": "0"}}>
@@ -188,7 +175,7 @@ export default function Component() {
   <RadixThemesHeading size={`7`}>
   {`What's an IP address?`}
 </RadixThemesHeading>
-  <RadixThemesContainer css={{"height": "5px"}}/>
+  <RadixThemesContainer css={{"height": "10px"}}/>
   <RadixThemesText as={`p`} css={{"wrap": "wrap"}}>
   {`
             An IP (Internet Protocol) address serves as a numerical label assigned to each device connected to a computer network
@@ -200,6 +187,7 @@ export default function Component() {
             `}
 </RadixThemesText>
 </RadixThemesContainer>
+</Fragment>
 </Fragment>
   <NextHead>
   <title>
