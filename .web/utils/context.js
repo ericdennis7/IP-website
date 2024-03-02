@@ -3,7 +3,6 @@ import { applyDelta, Event, hydrateClientStorage, useEventLoop, refs } from "/ut
 
 export const initialState = {}
 
-export const defaultColorMode = "None"
 export const ColorModeContext = createContext(null);
 export const UploadFilesContext = createContext(null);
 export const DispatchContext = createContext(null);
@@ -11,8 +10,6 @@ export const StateContexts = {
 }
 export const EventLoopContext = createContext(null);
 export const clientStorage = {}
-
-export const state_name = undefined
 
 export const onLoadInternalEvent = () => []
 

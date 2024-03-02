@@ -14,15 +14,15 @@ export default function Component() {
   return (
     <Fragment>
   <Fragment>
-  <RadixThemesFlex align={`center`} css={{"position": "fixed", "top": "0px", "backgroundColor": "white", "padding": "1em", "height": "4em", "width": "100%", "zIndex": "5", "borderBottom": "0.1px solid #eae7ec"}} direction={`row`} gap={`2`}>
-  <RadixThemesFlex align={`start`} direction={`row`} gap={`2`}>
+  <RadixThemesFlex align={`center`} css={{"position": "fixed", "top": "0px", "backgroundColor": "white", "padding": "1em", "height": "4em", "width": "100%", "zIndex": "5", "borderBottom": "0.1px solid #eae7ec", "flexDirection": "row"}} gap={`2`}>
+  <RadixThemesFlex align={`start`} css={{"flexDirection": "row"}} gap={`2`}>
   <img css={{"width": "2em"}} src={`/favicon.ico`}/>
   <RadixThemesHeading css={{"fontSize": "2em"}}>
   {`App`}
 </RadixThemesHeading>
 </RadixThemesFlex>
   <RadixThemesFlex css={{"flex": 1, "justifySelf": "stretch", "alignSelf": "stretch"}}/>
-  <RadixThemesFlex align={`center`} direction={`row`} gap={`5`}>
+  <RadixThemesFlex align={`center`} css={{"flexDirection": "row"}} gap={`5`}>
   <RadixThemesLink asChild={true} color={`blue`} css={{"variant": "soft", "radius": "medium"}}>
   <NextLink href={`https://www.linkedin.com/in/ericdennis7/`} passHref={true}>
   {`LinkedIn`}
@@ -60,7 +60,7 @@ export default function Component() {
 </RadixThemesHeading>
 </RadixThemesContainer>
   <RadixThemesContainer css={{"backgroundColor": "#f4f5f8"}}>
-  <RadixThemesFlex align={`start`} css={{"backgroundColor": "#f4f5f8"}} direction={`row`} gap={`2`}>
+  <RadixThemesFlex align={`start`} css={{"backgroundColor": "#f4f5f8", "flexDirection": "row"}} gap={`2`}>
   <RadixThemesLink asChild={true} css={{"color": "black", "backgroundColor": "white", "padding": "15px", "borderRadius": "7px 7px 0px 0px"}}>
   <NextLink href={`https://reflex.dev`} passHref={true}>
   {`My IP Address`}
@@ -80,45 +80,45 @@ export default function Component() {
 </RadixThemesContainer>
   <RadixThemesFlex align={`center`} css={{"height": "50vh", "margin": "1em", "border": "none", "inset": "0", "display": "flex", "alignItems": "center", "justifyContent": "center"}}>
   <RadixThemesContainer css={{"border": "none", "inset": "0"}}>
-  <RadixThemesContainer css={{"color": "white", "textAlign": "center", "textWrap": "wrap", "borderRadius": "7px 7px 0px 0px", "border": "none", "backgroundColor": "#218c74", "inset": "0", "padding": ".7em"}}>
+  <RadixThemesContainer css={{"color": "white", "textAlign": "center", "textWrap": "wrap", "borderRadius": "7px 7px 0px 0px", "border": "none", "backgroundColor": "#e54666", "inset": "0", "padding": ".7em"}}>
   <RadixThemesStrong>
-  {`You are protected!`}
+  {`You are unprotected!`}
 </RadixThemesStrong>
 </RadixThemesContainer>
-  <RadixThemesFlex align={`start`} css={{"borderRadius": "7px", "boxShadow": "rgba(0, 0, 0, 0.35) 0px 5px 15px"}} direction={`row`} gap={`2`}>
+  <RadixThemesFlex align={`start`} css={{"borderRadius": "7px", "boxShadow": "rgba(0, 0, 0, 0.35) 0px 5px 15px", "flexDirection": "row"}} gap={`2`}>
   <Box sx={{"width": "100%", "display": ["none", "none", "none", "block"]}}>
   <RadixThemesFlex css={{"width": "100%"}} justify={`between`} wrap={`wrap`}>
-  <RadixThemesCard css={{"borderRadius": "0px 0px 0px 7px", "border": "2px solid #218c74", "width": "40%", "padding": "1.5em", "spacing": "4"}}>
-  <RadixThemesFlex align={`center`} direction={`column`} gap={`2`}>
+  <RadixThemesCard css={{"borderRadius": "0px 0px 0px 7px", "border": "2px solid #e54666", "width": "40%", "padding": "1.5em", "spacing": "4"}}>
+  <RadixThemesFlex align={`center`} css={{"flexDirection": "column"}} gap={`2`}>
   <RadixThemesCard css={{"align": "center", "margin": "auto", "padding": "0px"}}>
   <RadixThemesTooltip content={`Image by storyset on Freepik`}>
-  <img align={`center`} css={{"width": "200px"}} src={`./protection.jpg`}/>
+  <img align={`center`} css={{"width": "200px"}} src={`./hacker.jpg`}/>
 </RadixThemesTooltip>
 </RadixThemesCard>
   <RadixThemesContainer css={{"height": "5px"}}/>
-  <RadixThemesText as={`p`} css={{"textAlign": "center", "color": "#218c74"}} size={`6`} weight={`bold`}>
-  {`Identity is Hidden`}
+  <RadixThemesText as={`p`} css={{"textAlign": "center", "color": "#e54666"}} size={`6`} weight={`bold`}>
+  {`Identity is Visible`}
 </RadixThemesText>
   <RadixThemesContainer css={{"height": "5px"}}/>
-  <RadixThemesButton css={{"backgroundColor": "#218c74"}}>
-  {`Perform a Global Ping Test`}
+  <RadixThemesButton css={{"backgroundColor": "#e54666"}}>
+  {`Hide Your Identity`}
 </RadixThemesButton>
 </RadixThemesFlex>
 </RadixThemesCard>
-  <RadixThemesCard css={{"borderRadius": "0px 0px 7px 0px", "border": "2px solid #218c74", "borderLeft": "none", "width": "60%", "padding": "1.5em", "spacing": "2"}}>
-  <RadixThemesFlex align={`start`} direction={`column`} gap={`2`}>
+  <RadixThemesCard css={{"borderRadius": "0px 0px 7px 0px", "border": "2px solid #e54666", "borderLeft": "none", "width": "60%", "padding": "1.5em", "spacing": "2"}}>
+  <RadixThemesFlex align={`start`} css={{"flexDirection": "column"}} gap={`2`}>
   <RadixThemesText as={`p`} size={`3`} weight={`light`}>
   {`IP Address:`}
 </RadixThemesText>
   <RadixThemesText as={`p`} size={`5`} weight={`bold`}>
-  {`89.187.180.58`}
+  {`146.70.202.37`}
 </RadixThemesText>
   <RadixThemesContainer css={{"height": "5px"}}/>
   <RadixThemesText as={`p`} size={`3`} weight={`light`}>
   {`City, Region:`}
 </RadixThemesText>
   <RadixThemesText as={`p`} size={`5`} weight={`bold`}>
-  {`Chicago, Illinois`}
+  {`New York City, New York`}
 </RadixThemesText>
   <RadixThemesContainer css={{"height": "5px"}}/>
   <RadixThemesText as={`p`} size={`3`} weight={`light`}>
@@ -132,7 +132,7 @@ export default function Component() {
   {`Internet Service Provider (org):`}
 </RadixThemesText>
   <RadixThemesText as={`p`} size={`5`} weight={`bold`}>
-  {`Datacamp Limited (Cdn77 CHI)`}
+  {`M247 Europe Infra (M247 Ltd New York)`}
 </RadixThemesText>
   <RadixThemesContainer css={{"height": "5px"}}/>
 </RadixThemesFlex>
@@ -141,18 +141,18 @@ export default function Component() {
 </Box>
 </RadixThemesFlex>
   <Box sx={{"display": ["block", "block", "block", "none"]}}>
-  <RadixThemesFlex align={`start`} css={{"width": "100%"}} direction={`row`} gap={`2`}>
+  <RadixThemesFlex align={`start`} css={{"width": "100%", "flexDirection": "row"}} gap={`2`}>
   <RadixThemesFlex css={{"width": "100%"}} justify={`between`} wrap={`wrap`}>
-  <RadixThemesCard css={{"borderRadius": "0px", "border": "2px solid #218c74", "borderBottom": "none", "width": "100%"}}>
+  <RadixThemesCard css={{"borderRadius": "0px", "border": "2px solid #e54666", "borderBottom": "none", "width": "100%"}}>
   {`Your IP Address: mobile`}
 </RadixThemesCard>
-  <RadixThemesCard css={{"borderRadius": "0px 0px 7px 7px", "border": "2px solid #218c74", "borderTop": "none", "width": "100%", "padding": "1.5em", "height": "auto"}}>
-  <RadixThemesFlex align={`start`} direction={`column`} gap={`2`}>
+  <RadixThemesCard css={{"borderRadius": "0px 0px 7px 7px", "border": "2px solid #e54666", "borderTop": "none", "width": "100%", "padding": "1.5em", "height": "auto"}}>
+  <RadixThemesFlex align={`start`} css={{"flexDirection": "column"}} gap={`2`}>
   <RadixThemesText as={`p`} size={`3`} weight={`light`}>
   {`IP Address:`}
 </RadixThemesText>
   <RadixThemesText as={`p`} size={`5`} weight={`bold`}>
-  {`89.187.180.58`}
+  {`146.70.202.37`}
 </RadixThemesText>
   <RadixThemesText as={`p`} size={`3`} weight={`light`}>
   {`Physical Address`}
@@ -161,7 +161,7 @@ export default function Component() {
   {`Timezone`}
 </RadixThemesText>
   <RadixThemesText as={`p`} size={`5`} weight={`bold`}>
-  {`America/Chicago`}
+  {`America/New York`}
 </RadixThemesText>
   <RadixThemesSeparator size={`4`}/>
 </RadixThemesFlex>
