@@ -171,21 +171,87 @@ export default function Component() {
 </Box>
 </RadixThemesContainer>
 </RadixThemesFlex>
-  <RadixThemesContainer css={{"padding": "1em"}}>
+  <RadixThemesContainer>
+  <RadixThemesFlex align={`start`} css={{"flexDirection": "row"}} gap={`2`}>
+  <RadixThemesFlex align={`start`} css={{"flexDirection": "column"}} gap={`2`}>
   <RadixThemesHeading size={`7`}>
   {`What's an IP address?`}
 </RadixThemesHeading>
-  <RadixThemesContainer css={{"height": "10px"}}/>
-  <RadixThemesText as={`p`} css={{"wrap": "wrap"}}>
+  <RadixThemesContainer css={{"height": "20px"}}/>
+  <RadixThemesText as={`p`} css={{"wrap": "wrap", "width": "88%"}}>
   {`
-            An IP (Internet Protocol) address serves as a numerical label assigned to each device connected to a computer network
-            that uses the Internet Protocol for communication. It functions much like a home address in the digital realm. 
-            When data is sent over the internet, it gets divided into packets, and each packet contains both the sender's and receiver's 
-            IP addresses. These addresses ensure that the data reaches the correct destination, allowing devices to communicate and share 
-            information across the vast network of interconnected computers that make up the internet. In essence, IP addresses play a 
-            fundamental role in facilitating the routing and delivery of data between different devices on the internet.
-            `}
+                    An IP (Internet Protocol) address serves as a numerical label assigned to each device connected to a computer network
+                    that uses the Internet Protocol for communication. It functions much like a home address in the digital realm.
+                    `}
 </RadixThemesText>
+  <RadixThemesContainer css={{"height": "7px"}}/>
+  <RadixThemesText as={`p`} css={{"wrap": "wrap", "width": "88%"}}>
+  {`
+                    When data is sent over the internet, it gets divided into packets, and each packet contains both the sender's and receiver's 
+                    IP addresses. These addresses ensure that the data reaches the correct destination, allowing devices to communicate and share 
+                    information across the vast network of interconnected computers that make up the internet. In essence, IP addresses play a 
+                    fundamental role in facilitating the routing and delivery of data between different devices on the internet.
+                    `}
+</RadixThemesText>
+</RadixThemesFlex>
+  <img css={{"width": "300px", "margin": "auto", "marginTop": "0px", "padding": "10px"}} src={`./what_is_an_ip_address.jpg`}/>
+</RadixThemesFlex>
+</RadixThemesContainer>
+  <RadixThemesContainer css={{"height": "70px"}}/>
+  <RadixThemesContainer css={{"height": "auto", "backgroundColor": "#f4f5f8", "marginTop": "30px", "marginBottom": "70px"}}>
+  <RadixThemesFlex align={`start`} css={{"flexDirection": "row"}} gap={`2`}>
+  <RadixThemesFlex align={`start`} css={{"flexDirection": "column"}} gap={`2`}>
+  <RadixThemesContainer css={{"width": "20px"}}/>
+  <RadixThemesFlex align={`start`} css={{"flexDirection": "column"}} gap={`2`}>
+  <RadixThemesContainer css={{"height": "30px"}}/>
+  <RadixThemesHeading size={`7`}>
+  {`Why's my location not accurate?`}
+</RadixThemesHeading>
+  <RadixThemesContainer css={{"height": "20px"}}/>
+  <RadixThemesText as={`p`} css={{"wrap": "wrap", "width": "100%"}}>
+  {`
+                        Your IP address location isn't always your precise location because IP addresses are assigned based on regions, 
+                        not exact addresses. Internet Service Providers (ISPs) assign IP addresses to their users within specific geographic areas, 
+                        often identified by towns or cities. When websites or services try to determine your location based on your IP address, 
+                        they can only get an approximate idea of where you are.
+
+                        This approximation is due to the way IP addresses are distributed. ISPs allocate IP addresses in blocks to different regions, 
+                        and many users within the same area may share similar or identical IP addresses. As a result, services can identify the general 
+                        region or city associated with an IP address but not the specific address or location of an individual user.
+                        Additionally, some users may employ technologies like Virtual Private Networks (VPNs) or proxies, which can further mask 
+                        their true location by making it appear as if they are connecting from a different city or country.
+                        `}
+</RadixThemesText>
+  <RadixThemesContainer css={{"height": "30px"}}/>
+</RadixThemesFlex>
+</RadixThemesFlex>
+</RadixThemesFlex>
+</RadixThemesContainer>
+  <RadixThemesContainer css={{"padding": "1em"}}>
+  <RadixThemesFlex align={`start`} css={{"flexDirection": "row"}} gap={`2`}>
+  <RadixThemesContainer css={{"height": "30px"}}/>
+  <img css={{"width": "300px", "margin": "auto", "marginTop": "0px", "padding": "10px"}} src={`./what_is_vpn.jpg`}/>
+  <RadixThemesContainer css={{"width": "55px"}}/>
+  <RadixThemesFlex align={`start`} css={{"flexDirection": "column"}} gap={`2`}>
+  <RadixThemesContainer css={{"height": "30px"}}/>
+  <RadixThemesHeading size={`7`}>
+  {`What's a VPN?`}
+</RadixThemesHeading>
+  <RadixThemesContainer css={{"height": "20px"}}/>
+  <RadixThemesText as={`p`} css={{"wrap": "wrap", "width": "100%"}}>
+  {`
+                    A VPN, or Virtual Private Network, is like a secure and private tunnel on the internet. 
+                    When you use the internet without a VPN, it's a bit like talking on the phone without a private room – people 
+                    might overhear your conversations. But when you use a VPN, it's like having a secret room where your internet 
+                    activities are safe from eavesdropping. The VPN encrypts your data, making it unreadable to anyone trying to spy 
+                    on you. It's useful for protecting your privacy, especially when using public Wi-Fi, and it can also make it seem 
+                    like your computer is in a different location, which can be handy for accessing content that might be restricted 
+                    in your school or country.
+                    `}
+</RadixThemesText>
+</RadixThemesFlex>
+  <RadixThemesContainer css={{"width": "20px"}}/>
+</RadixThemesFlex>
 </RadixThemesContainer>
 </Fragment>
 </Fragment>

@@ -213,17 +213,83 @@ def ip_address_page():
         
     # LEARNING ABOUT IP ADDRESSES
     rx.container(
-        rx.heading("What's an IP address?", size="7"),
-        rx.container(height="10px"),
-        rx.text("""
-            An IP (Internet Protocol) address serves as a numerical label assigned to each device connected to a computer network
-            that uses the Internet Protocol for communication. It functions much like a home address in the digital realm. 
-            When data is sent over the internet, it gets divided into packets, and each packet contains both the sender's and receiver's 
-            IP addresses. These addresses ensure that the data reaches the correct destination, allowing devices to communicate and share 
-            information across the vast network of interconnected computers that make up the internet. In essence, IP addresses play a 
-            fundamental role in facilitating the routing and delivery of data between different devices on the internet.
-            """,
-            wrap="wrap"),
+        rx.hstack(
+            rx.vstack(
+            rx.heading("What's an IP address?", size="7"),
+            rx.container(height="20px"),
+                rx.text("""
+                    An IP (Internet Protocol) address serves as a numerical label assigned to each device connected to a computer network
+                    that uses the Internet Protocol for communication. It functions much like a home address in the digital realm.
+                    """,
+                    wrap="wrap", width="88%"),
+                rx.container(height="7px"),
+                rx.text("""
+                    When data is sent over the internet, it gets divided into packets, and each packet contains both the sender's and receiver's 
+                    IP addresses. These addresses ensure that the data reaches the correct destination, allowing devices to communicate and share 
+                    information across the vast network of interconnected computers that make up the internet. In essence, IP addresses play a 
+                    fundamental role in facilitating the routing and delivery of data between different devices on the internet.
+                    """, 
+                    wrap="wrap", width="88%")
+                
+            ),
+            rx.image(src="./what_is_an_ip_address.jpg", width="300px", margin="auto", margin_top="0px", padding="10px")
+        ),
+    ),
+    rx.container(height="70px"),
+    # GRAY SECTION OF INFO
+    rx.container(
+        rx.hstack(
+            rx.vstack(
+                rx.container(width="20px"),
+                rx.vstack(
+                    rx.container(height="30px"),
+                    rx.heading("Why's my location not accurate?", size="7"),
+                    rx.container(height="20px"),
+                    rx.text("""
+                        Your IP address location isn't always your precise location because IP addresses are assigned based on regions, 
+                        not exact addresses. Internet Service Providers (ISPs) assign IP addresses to their users within specific geographic areas, 
+                        often identified by towns or cities. When websites or services try to determine your location based on your IP address, 
+                        they can only get an approximate idea of where you are.
+
+                        This approximation is due to the way IP addresses are distributed. ISPs allocate IP addresses in blocks to different regions, 
+                        and many users within the same area may share similar or identical IP addresses. As a result, services can identify the general 
+                        region or city associated with an IP address but not the specific address or location of an individual user.
+                        Additionally, some users may employ technologies like Virtual Private Networks (VPNs) or proxies, which can further mask 
+                        their true location by making it appear as if they are connecting from a different city or country.
+                        """, 
+                        wrap="wrap", width="100%"),
+                    rx.container(height="30px"),
+                ),
+            ), 
+        ),
+        height="auto",
+        background_color="#f4f5f8",
+        margin_top="30px",
+        margin_bottom="70px"),
+    
+    # MAIN INFORMATION PART WITH IMAGES
+    rx.container(
+        rx.hstack(
+            rx.container(height="30px"),
+            rx.image(src="./what_is_vpn.jpg", width="300px", margin="auto", margin_top="0px", padding="10px"),
+            rx.container(width="55px"),
+            rx.vstack(
+                rx.container(height="30px"),
+                rx.heading("What's a VPN?", size="7"),
+                rx.container(height="20px"),
+                rx.text("""
+                    A VPN, or Virtual Private Network, is like a secure and private tunnel on the internet. 
+                    When you use the internet without a VPN, it's a bit like talking on the phone without a private room – people 
+                    might overhear your conversations. But when you use a VPN, it's like having a secret room where your internet 
+                    activities are safe from eavesdropping. The VPN encrypts your data, making it unreadable to anyone trying to spy 
+                    on you. It's useful for protecting your privacy, especially when using public Wi-Fi, and it can also make it seem 
+                    like your computer is in a different location, which can be handy for accessing content that might be restricted 
+                    in your school or country.
+                    """,
+                    wrap="wrap", width="100%"),
+            ),
+            rx.container(width="20px"),
+        ),
         padding="1em"
         ),
     )
