@@ -243,7 +243,7 @@ def ip_address_page():
                 rx.container(width="20px"),
                 rx.vstack(
                     rx.container(height="30px"),
-                    rx.heading("Why's my location not accurate?", size="7"),
+                    rx.heading("Why is my location wrong?", size="7"),
                     rx.container(height="20px"),
                     rx.text("""
                         Your IP address location isn't always your precise location because IP addresses are assigned based on regions, 

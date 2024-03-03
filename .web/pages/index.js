@@ -205,7 +205,7 @@ export default function Component() {
   <RadixThemesFlex align={`start`} css={{"flexDirection": "column"}} gap={`2`}>
   <RadixThemesContainer css={{"height": "30px"}}/>
   <RadixThemesHeading size={`7`}>
-  {`Why's my location not accurate?`}
+  {`Why is my location wrong?`}
 </RadixThemesHeading>
   <RadixThemesContainer css={{"height": "20px"}}/>
   <RadixThemesText as={`p`} css={{"wrap": "wrap", "width": "100%"}}>
