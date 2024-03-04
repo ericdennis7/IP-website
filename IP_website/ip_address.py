@@ -62,7 +62,7 @@ def ip_address_page():
     ### CLASSES / MANAGING APP EXTRAS) ###
 
 
-    ### MAIN APP / HOMEPAGE ###
+    ### MAIN APP / HOMEPAGE FOR DESKTOP APPS ###
 
     return rx.fragment(
         rx.desktop_only(
@@ -108,8 +108,6 @@ def ip_address_page():
                     inset="0",
                     padding=".7em",
                     ),
-            
-            # DESKTOP VERSION ONLY
             rx.hstack(
                     rx.flex(
                         rx.card(
@@ -172,8 +170,6 @@ def ip_address_page():
         inset="0",
         align="center",
     ),
-        
-    # LEARNING ABOUT IP ADDRESSES
     rx.container(height="30px"),
     rx.container(
         rx.hstack(
@@ -200,7 +196,6 @@ def ip_address_page():
         margin="1em"
     ),
     rx.container(height="50px"),
-    # GRAY SECTION OF INFO
     rx.container(
         rx.hstack(
             rx.vstack(
@@ -232,8 +227,6 @@ def ip_address_page():
         margin_bottom="70px",
         padding="1em"
         ),
-    
-    # MAIN INFORMATION PART WITH IMAGES
     rx.container(
         rx.hstack(
             rx.container(height="30px"),
@@ -260,11 +253,8 @@ def ip_address_page():
         ),
     ),
         
-        
-    ### MOBILE VERSION ###    
+    ### MAIN APP / HOMEPAGE FOR MOBILE APPS ###
 
-
-        
     rx.mobile_and_tablet(
         rx.container(
             rx.heading("What's my IP address?", size="9", margin_top="10vh", align="left"),
