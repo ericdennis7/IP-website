@@ -1,3 +1,10 @@
+# Name: Eric Dennis
+# Started: 2/29/2024
+# Last Updated: 3/4/2024
+# Update Notes: 
+
+### IMPORTS ###
+
 import json
 import requests
 import reflex as rx
@@ -5,6 +12,9 @@ import myipaddress as myip
 
 from .navbar import navbar
 
+### IP ADDRESS PAGE ###
+
+# FETCHING IP INFORMATION FROM IP-API
 def ip_address_page():
     def ip(arg1):
         response = requests.get(f"http://ip-api.com/json/{arg1}?fields=66846719")
@@ -38,7 +48,7 @@ def ip_address_page():
     myip_info = myip.info()
     ip_api = ip(myip_info.get('ip'))
 
-    # Setting conditions on whether the user is protected or not.
+    # SETTING CONDITIONS ON WHETHER OR NOT THE USER IS USING A VPN
     vpn_status_color = "#000"
     protection_status_text = "N/A"
     protection_status_img = "N/A"
@@ -65,12 +75,14 @@ def ip_address_page():
     ### MAIN APP / HOMEPAGE FOR DESKTOP APPS ###
 
     return rx.fragment(
+        # MAIN CONTAINER
         rx.desktop_only(
         rx.container(
             rx.heading("What's my IP address?", size="9", margin_top="10vh", align="left"),
             background_color="#f4f5f8",
             padding="50px 1em 100px 1em"
         ),
+        # MINI NAVBAR
         rx.container(
             rx.hstack(
                 rx.link("My IP Address", 
@@ -95,6 +107,7 @@ def ip_address_page():
             ),
             background_color="#f4f5f8",
         ),
+        # MAIN IP INFORMATION BOX & LOGIC
         rx.center(
             rx.container(
                 rx.container(
@@ -170,6 +183,7 @@ def ip_address_page():
         inset="0",
         align="center",
     ),
+    # INFORMATION SECTION TO TEACH OTHERS
     rx.container(height="30px"),
     rx.container(
         rx.hstack(
@@ -256,12 +270,14 @@ def ip_address_page():
     ### MAIN APP / HOMEPAGE FOR MOBILE APPS ###
 
     rx.mobile_and_tablet(
+        # MAIN CONTAINER FOR MOBILE
         rx.container(
             rx.heading("What's my IP address?", size="9", margin_top="10vh", align="left"),
             background_color="#f4f5f8",
             padding="50px 1em 100px 1em",
             width="100%"
         ),
+        # MINI NAVBAR FOR MOBILE
         rx.container(
             rx.hstack(
                 rx.link("IP Address", 
@@ -288,6 +304,7 @@ def ip_address_page():
             padding_left="1em",
             padding_right="1em"
         ),
+        # DISPLAYING IP INFORMATION & LOGIC FOR MOBILE
         rx.center(
             rx.container(
                 rx.container(
@@ -343,6 +360,7 @@ def ip_address_page():
                 ),
             ),
         ),
+        # INFORMATION SECTION TO TEACH OTHERS ON MOBILE
         rx.container(
             rx.vstack(
                 rx.container(height="50px"),
