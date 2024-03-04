@@ -90,12 +90,12 @@ export default function Component() {
   {`My IP Address`}
 </NextLink>
 </RadixThemesLink>
-  <RadixThemesLink asChild={true} css={{"color": "black", "backgroundColor": "hsla(0,0%,100%,.5)", "padding": "15px", "borderRadius": "7px 7px 0px 0px"}}>
+  <RadixThemesLink asChild={true} css={{"color": "rgba(34,46,58,.5)", "backgroundColor": "hsla(0,0%,100%,.5)", "padding": "15px", "borderRadius": "7px 7px 0px 0px"}}>
   <NextLink href={`https://reflex.dev`} passHref={true}>
   {`My Global Ping`}
 </NextLink>
 </RadixThemesLink>
-  <RadixThemesLink asChild={true} css={{"color": "black", "backgroundColor": "hsla(0,0%,100%,.5)", "padding": "15px", "borderRadius": "7px 7px 0px 0px"}}>
+  <RadixThemesLink asChild={true} css={{"color": "rgba(34,46,58,.5)", "backgroundColor": "hsla(0,0%,100%,.5)", "padding": "15px", "borderRadius": "7px 7px 0px 0px"}}>
   <NextLink href={`https://reflex.dev`} passHref={true}>
   {`Track My Packet`}
 </NextLink>
@@ -261,12 +261,12 @@ export default function Component() {
   {`IP Address`}
 </NextLink>
 </RadixThemesLink>
-  <RadixThemesLink asChild={true} css={{"color": "black", "backgroundColor": "hsla(0,0%,100%,.5)", "padding": "15px", "borderRadius": "7px 7px 0px 0px"}}>
+  <RadixThemesLink asChild={true} css={{"color": "rgba(34,46,58,.5)", "backgroundColor": "hsla(0,0%,100%,.5)", "padding": "15px", "borderRadius": "7px 7px 0px 0px"}}>
   <NextLink href={`https://reflex.dev`} passHref={true}>
   {`Global Ping`}
 </NextLink>
 </RadixThemesLink>
-  <RadixThemesLink asChild={true} css={{"color": "black", "backgroundColor": "hsla(0,0%,100%,.5)", "padding": "15px", "borderRadius": "7px 7px 0px 0px"}}>
+  <RadixThemesLink asChild={true} css={{"color": "rgba(34,46,58,.5)", "backgroundColor": "hsla(0,0%,100%,.5)", "padding": "15px", "borderRadius": "7px 7px 0px 0px"}}>
   <NextLink href={`https://reflex.dev`} passHref={true}>
   {`Track My Packet`}
 </NextLink>
