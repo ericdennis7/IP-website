@@ -1,51 +1,18 @@
 /** @jsxImportSource @emotion/react */
 
 
-import { Fragment, useContext } from "react"
-import { EventLoopContext } from "/utils/context"
-import { Event, getBackendURL, isTrue } from "/utils/state"
-import { Button as RadixThemesButton, Card as RadixThemesCard, Container as RadixThemesContainer, Dialog as RadixThemesDialog, DropdownMenu as RadixThemesDropdownMenu, Flex as RadixThemesFlex, Heading as RadixThemesHeading, Link as RadixThemesLink, Separator as RadixThemesSeparator, Strong as RadixThemesStrong, Text as RadixThemesText, Tooltip as RadixThemesTooltip } from "@radix-ui/themes"
-import env from "/env.json"
+import { Fragment } from "react"
+import { Button as RadixThemesButton, Card as RadixThemesCard, Container as RadixThemesContainer, DropdownMenu as RadixThemesDropdownMenu, Flex as RadixThemesFlex, Heading as RadixThemesHeading, Link as RadixThemesLink, Separator as RadixThemesSeparator, Strong as RadixThemesStrong, Text as RadixThemesText, Tooltip as RadixThemesTooltip } from "@radix-ui/themes"
 import { Box } from "@chakra-ui/react"
 import NextLink from "next/link"
 import NextHead from "next/head"
 
 
 
-export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
-
-
-  return (
-    <Fragment>
-  {isTrue(connectError !== null) ? (
-  <Fragment>
-  <RadixThemesDialog.Root open={connectError !== null}>
-  <RadixThemesDialog.Content>
-  <RadixThemesDialog.Title>
-  {`Connection Error`}
-</RadixThemesDialog.Title>
-  <RadixThemesText as={`p`}>
-  {`Cannot connect to server: `}
-  {(connectError !== null) ? connectError.message : ''}
-  {`. Check if server is reachable at `}
-  {getBackendURL(env.EVENT).href}
-</RadixThemesText>
-</RadixThemesDialog.Content>
-</RadixThemesDialog.Root>
-</Fragment>
-) : (
-  <Fragment/>
-)}
-</Fragment>
-  )
-}
-
 export default function Component() {
 
   return (
     <Fragment>
-  <Fragment_1762bb90abdb81b879b2a22edbbe01a1/>
   <Fragment>
   <RadixThemesFlex align={`center`} css={{"position": "fixed", "top": "0px", "backgroundColor": "white", "padding": "1em", "height": "4em", "width": "100%", "zIndex": "5", "borderBottom": "0.1px solid #eae7ec", "flexDirection": "row"}} gap={`2`}>
   <RadixThemesFlex align={`start`} css={{"flexDirection": "row"}} gap={`2`}>
@@ -86,12 +53,12 @@ export default function Component() {
   <RadixThemesContainer css={{"backgroundColor": "#f4f5f8"}}>
   <RadixThemesFlex align={`start`} css={{"backgroundColor": "#f4f5f8", "flexDirection": "row"}} gap={`2`}>
   <RadixThemesLink asChild={true} css={{"color": "black", "backgroundColor": "white", "padding": "15px", "borderRadius": "7px 7px 0px 0px"}}>
-  <NextLink href={`https://reflex.dev`} passHref={true}>
+  <NextLink href={`/`} passHref={true}>
   {`My IP Address`}
 </NextLink>
 </RadixThemesLink>
   <RadixThemesLink asChild={true} css={{"color": "rgba(34,46,58,.5)", "backgroundColor": "hsla(0,0%,100%,.5)", "padding": "15px", "borderRadius": "7px 7px 0px 0px"}}>
-  <NextLink href={`https://reflex.dev`} passHref={true}>
+  <NextLink href={`/globalping`} passHref={true}>
   {`My Global Ping`}
 </NextLink>
 </RadixThemesLink>

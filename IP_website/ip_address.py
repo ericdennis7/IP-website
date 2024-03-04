@@ -10,9 +10,7 @@ import requests
 import reflex as rx
 import myipaddress as myip
 
-from .navbar import navbar
-
-### IP ADDRESS PAGE ###
+### MAIN PAGE FUNCTION ###
 
 # FETCHING IP INFORMATION FROM IP-API
 def ip_address_page():
@@ -68,10 +66,6 @@ def ip_address_page():
         button_text = "Hide Your Identity"
         identity_text = "Identity is Visible"
 
-
-    ### CLASSES / MANAGING APP EXTRAS) ###
-
-
     ### MAIN APP / HOMEPAGE FOR DESKTOP APPS ###
 
     return rx.fragment(
@@ -86,13 +80,13 @@ def ip_address_page():
         rx.container(
             rx.hstack(
                 rx.link("My IP Address", 
-                        href="https://reflex.dev",
+                        href="/",
                         color="black",
                         background_color="white", 
                         padding="15px", 
                         border_radius='7px 7px 0px 0px'),
                 rx.link("My Global Ping", 
-                        href="https://reflex.dev",
+                        href="/globalping",
                         color="rgba(34,46,58,.5)",
                         background_color="hsla(0,0%,100%,.5)", 
                         padding="15px", 

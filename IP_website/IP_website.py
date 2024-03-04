@@ -8,6 +8,7 @@ import reflex as rx
 
 from .navbar import navbar
 from .ip_address import ip_address_page
+from .globalping import globalping_page
 
 
 ### CREATING GLOBAL STYLES USING CSS ###
@@ -32,12 +33,7 @@ style={
     }
 }
 
-class State(rx.State):
-    is_loading: bool = False
-
-async def perform_task():
-    # Simulate a task that takes some time
-    await trio.sleep(3)
+### CLASSES ###
 
 ### THE HOME PAGE / IP ADDRESS PAGE
 
@@ -47,12 +43,14 @@ def ip_page():
         ip_address_page()
     )
 
+### THE GLOBALPING PAGE ###
+
 def global_ping_page():
     return rx.fragment(
-        navbar()
+        navbar(),
+        globalping_page()
     )
     
-
 ### CREATING THE APP ###
 
 app = rx.App(theme=rx.theme(accent_color="blue"), style=style)
