@@ -67,6 +67,7 @@ def ip_address_page():
     ### MAIN APP / HOMEPAGE ###
 
     return rx.fragment(
+        rx.desktop_only(
         rx.container(
             rx.heading("What's my IP address?", size="9", margin_top="10vh", align="left"),
             background_color="#f4f5f8",
@@ -112,7 +113,6 @@ def ip_address_page():
             
             # DESKTOP VERSION ONLY
             rx.hstack(
-                rx.desktop_only(
                     rx.flex(
                         rx.card(
                             rx.vstack(
@@ -161,45 +161,9 @@ def ip_address_page():
                         width="100%"
                     ),
                     width="100%",
-                ),
+                #),
                 border_radius="7px",
                 box_shadow="rgba(0, 0, 0, 0.35) 0px 5px 15px",
-            ),
-            
-        # PHONE AND TABLET VIEW ONLY
-        rx.mobile_and_tablet(
-            rx.hstack(
-                rx.flex(
-                    rx.card(
-                        "Your IP Address: mobile",
-                        border_radius="0px",
-                        border=f"2px solid {vpn_status_color}",
-                        border_bottom="none",
-                        width="100%"
-                    ),
-                    rx.card(
-                        rx.vstack(
-                            rx.text("IP Address:", size="3", weight="light"), 
-                            rx.text(f"{myip_info.get('ip')}", size="5", weight="bold"),
-                            rx.text("Physical Address", size="3", weight="light"),
-                            #rx.text(f"{myip_info.public_fulladdress()}", size="5", weight="bold"),
-                            rx.text("Timezone", size="3", weight="light"),
-                            rx.text(f"{myip_info.get('timezone').replace('_', ' ')}", size="5", weight="bold"),
-                            rx.divider()
-                        ),
-                        border_radius="0px 0px 7px 7px",
-                        border=f"2px solid {vpn_status_color}",
-                        border_top="none",
-                        width="100%",
-                        padding="1.5em",
-                        height="auto",
-                    ),
-                    justify="between",
-                    wrap="wrap",
-                    width="100%"
-                    ),
-                width="100%",
-                ),
             ),
             border="none",
             inset="0",
@@ -292,4 +256,165 @@ def ip_address_page():
         ),
         padding="1em"
         ),
+    ),
+        
+        
+    ### MOBILE VERSION ###    
+
+
+        
+    rx.mobile_and_tablet(
+        rx.container(
+            rx.heading("What's my IP address?", size="9", margin_top="10vh", align="left"),
+            background_color="#f4f5f8",
+            padding="50px 1em 100px 1em",
+            width="100%"
+        ),
+        rx.container(
+            rx.hstack(
+                rx.link("IP Address", 
+                        href="https://reflex.dev",
+                        color="black",
+                        background_color="white", 
+                        padding="15px", 
+                        border_radius='7px 7px 0px 0px'),
+                rx.link("Global Ping", 
+                        href="https://reflex.dev",
+                        color="black",
+                        background_color="hsla(0,0%,100%,.5)", 
+                        padding="15px", 
+                        border_radius='7px 7px 0px 0px'),
+                rx.link("Track My Packet", 
+                        href="https://reflex.dev",
+                        color="black",
+                        background_color="hsla(0,0%,100%,.5)", 
+                        padding="15px", 
+                        border_radius='7px 7px 0px 0px'),
+                background_color="#f4f5f8",
+            ),
+            background_color="#f4f5f8",
+            padding_left="1em",
+            padding_right="1em"
+        ),
+        rx.center(
+            rx.container(
+                rx.container(
+                    rx.text.strong(f"{protection_status_text}"),
+                    color="white",
+                    text_align="center",
+                    text_wrap="wrap",
+                    border_radius="7px 7px 0px 0px",
+                    border="none",
+                    background_color=f"{vpn_status_color}",
+                    inset="0",
+                    padding=".7em",
+                    margin="4em 1em 0px 1em"
+                    ),
+                rx.flex(
+                    rx.card(
+                        rx.vstack(
+                            rx.card(
+                                rx.tooltip(rx.image(src=f"{protection_status_img}", width="200px", align="center", margin="auto"), content='Image by storyset on Freepik'),
+                                align="center",
+                                margin="auto",
+                                padding="0px",
+                                text_align="center"
+                            ),
+                            rx.container(height="5px"),
+                            rx.text(f"{identity_text}", text_align="center", color=f"{vpn_status_color}", weight="bold", size="6"),
+                            rx.container(height="5px"),
+                            rx.button(f"{button_text}", background_color=f"{vpn_status_color}"),
+                            rx.container(height="5px"),
+                            rx.divider(size="4"),
+                            rx.container(height="5px"),
+                            rx.text("IP Address:", size="3", weight="light"), 
+                            rx.text(f"{myip_info.get('ip')}", size="5", weight="bold"),
+                            rx.container(height="5px"),  
+                            rx.text("City, Region:", size="3", weight="light"),
+                            rx.text(f"{ip_api.get('city')}, {ip_api.get('region')}", size="5", weight="bold"),
+                            rx.container(height="5px"),  
+                            rx.text("Country, Continent:", size="3", weight="light"),
+                            rx.text(f"{ip_api.get('country')}, {ip_api.get('continent')}", size="5", weight="bold"),
+                            rx.container(height="5px"),  
+                            rx.text("Internet Service Provider (org):", size="3", weight="light"), 
+                            rx.text(f"{ip_api.get('iso')} ({ip_api.get('org')})", size="5", weight="bold"),
+                            rx.container(height="5px"),     
+                            align="center"
+                        ),
+                        border_radius="0px 0px 7px 7px",
+                        border=f"2px solid {vpn_status_color}",
+                        width="100%",
+                        padding="1.5em",
+                        spacing="4",
+                        margin="0px 1em 0px 1em"
+                    ),
+                ),
+            ),
+        ),
+        rx.container(
+            rx.vstack(
+                rx.container(height="50px"),
+                rx.heading("What's an IP address?", size="7"),
+                rx.container(height="20px"),
+                rx.text("""
+                    An IP (Internet Protocol) address serves as a numerical label assigned to each device connected to a computer network
+                    that uses the Internet Protocol for communication. It functions much like a home address in the digital realm.
+                    """,
+                    wrap="wrap", width="100%"),
+                rx.container(height="7px"),
+                rx.text("""
+                    When data is sent over the internet, it gets divided into packets, and each packet contains both the sender's and receiver's 
+                    IP addresses. These addresses ensure that the data reaches the correct destination, allowing devices to communicate and share 
+                    information across the vast network of interconnected computers that make up the internet. In essence, IP addresses play a 
+                    fundamental role in facilitating the routing and delivery of data between different devices on the internet.
+                    """, 
+                    wrap="wrap", width="100%"),
+                rx.image(src="./what_is_an_ip_address.jpg", width="300px", margin="auto", margin_top="15px", padding="10px"),
+                margin="1em",
+            ),
+            rx.container(height="50px"),
+            rx.container(
+                rx.container(
+                    rx.container(height="40px"),
+                    rx.heading("Why is my location wrong?", size="7"),
+                    rx.container(height="20px"),
+                    rx.text("""
+                        Your IP address location isn't always your precise location because IP addresses are assigned based on regions, 
+                        not exact addresses. Internet Service Providers (ISPs) assign IP addresses to their users within specific geographic areas, 
+                        often identified by towns or cities. When websites or services try to determine your location based on your IP address, 
+                        they can only get an approximate idea of where you are.
+
+                        This approximation is due to the way IP addresses are distributed. ISPs allocate IP addresses in blocks to different regions, 
+                        and many users within the same area may share similar or identical IP addresses. As a result, services can identify the general 
+                        region or city associated with an IP address but not the specific address or location of an individual user.
+                        Additionally, some users may employ technologies like Virtual Private Networks (VPNs) or proxies, which can further mask 
+                        their true location by making it appear as if they are connecting from a different city or country.
+                        """, 
+                        wrap="wrap", width="100%"),
+                    rx.container(height="40px"),
+                    background_color="#f4f5f8",
+                    margin="1em"
+                ),
+                background_color="#f4f5f8"
+            ),
+        ),
+        rx.container(height="50px"),
+        rx.container(
+            rx.heading("What's a VPN?", size="7"),
+            rx.container(height="20px"),
+            rx.text("""
+                A VPN, or Virtual Private Network, is like a secure and private tunnel on the internet. 
+                When you use the internet without a VPN, it's a bit like talking on the phone without a private room – people 
+                might overhear your conversations. But when you use a VPN, it's like having a secret room where your internet 
+                activities are safe from eavesdropping. The VPN encrypts your data, making it unreadable to anyone trying to spy 
+                on you. It's useful for protecting your privacy, especially when using public Wi-Fi, and it can also make it seem 
+                like your computer is in a different location, which can be handy for accessing content that might be restricted 
+                in your school or country.
+                """,
+                wrap="wrap", width="100%"),
+            rx.image(src="./what_is_vpn.jpg", width="300px", margin="auto", margin_top="0px", padding="10px"),
+            margin="1em"
+            ),
+        ),
     )
+    
