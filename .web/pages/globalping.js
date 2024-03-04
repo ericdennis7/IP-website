@@ -2,7 +2,9 @@
 
 
 import { Fragment } from "react"
-import { Button as RadixThemesButton, DropdownMenu as RadixThemesDropdownMenu, Flex as RadixThemesFlex, Heading as RadixThemesHeading } from "@radix-ui/themes"
+import { Button as RadixThemesButton, Container as RadixThemesContainer, DropdownMenu as RadixThemesDropdownMenu, Flex as RadixThemesFlex, Heading as RadixThemesHeading, Link as RadixThemesLink, Select as RadixThemesSelect } from "@radix-ui/themes"
+import { Box } from "@chakra-ui/react"
+import NextLink from "next/link"
 import NextHead from "next/head"
 
 
@@ -41,7 +43,55 @@ export default function Component() {
 </RadixThemesDropdownMenu.Root>
 </RadixThemesFlex>
 </RadixThemesFlex>
-  {`["<Fragment>\n  <Box sx={{\"display\": [\"none\", \"none\", \"none\", \"block\"]}}>\n  <RadixThemesContainer css={{\"backgroundColor\": \"#f4f5f8\", \"padding\": \"50px 1em 100px 1em\"}}>\n  <RadixThemesHeading align={\`left\`} css={{\"marginTop\": \"10vh\"}} size={\`9\`}>\n  {\`Get your ping from anywhere!\`}\n</RadixThemesHeading>\n</RadixThemesContainer>\n  <RadixThemesContainer css={{\"backgroundColor\": \"#f4f5f8\"}}>\n  <RadixThemesFlex align={\`start\`} css={{\"backgroundColor\": \"#f4f5f8\"}} gap={\`2\`}>\n  <RadixThemesLink asChild={true} css={{\"color\": \"rgba(34,46,58,.5)\", \"backgroundColor\": \"white\", \"padding\": \"15px\", \"borderRadius\": \"7px 7px 0px 0px\"}}>\n  <NextLink href={\`/\`} passHref={true}>\n  {\`My IP Address\`}\n</NextLink>\n</RadixThemesLink>\n  <RadixThemesLink asChild={true} css={{\"color\": \"black\", \"backgroundColor\": \"hsla(0,0%,100%,.5)\", \"padding\": \"15px\", \"borderRadius\": \"7px 7px 0px 0px\"}}>\n  <NextLink href={\`/globalping\`} passHref={true}>\n  {\`My Global Ping\`}\n</NextLink>\n</RadixThemesLink>\n  <RadixThemesLink asChild={true} css={{\"color\": \"rgba(34,46,58,.5)\", \"backgroundColor\": \"hsla(0,0%,100%,.5)\", \"padding\": \"15px\", \"borderRadius\": \"7px 7px 0px 0px\"}}>\n  <NextLink href={\`https://reflex.dev\`} passHref={true}>\n  {\`Track My Packet\`}\n</NextLink>\n</RadixThemesLink>\n</RadixThemesFlex>\n</RadixThemesContainer>\n</Box>\n</Fragment>"]`}
+  <Fragment>
+  <Box sx={{"display": ["none", "none", "none", "block"]}}>
+  <RadixThemesContainer css={{"backgroundColor": "#f4f5f8", "padding": "50px 1em 100px 1em"}}>
+  <RadixThemesHeading align={`left`} css={{"marginTop": "10vh"}} size={`9`}>
+  {`Get your ping from anywhere! 🌎`}
+</RadixThemesHeading>
+</RadixThemesContainer>
+  <RadixThemesContainer css={{"backgroundColor": "#f4f5f8"}}>
+  <RadixThemesFlex align={`start`} css={{"backgroundColor": "#f4f5f8", "flexDirection": "row"}} gap={`2`}>
+  <RadixThemesLink asChild={true} css={{"color": "rgba(34,46,58,.5)", "backgroundColor": "hsla(0,0%,100%,.5)", "padding": "15px", "borderRadius": "7px 7px 0px 0px"}}>
+  <NextLink href={`/`} passHref={true}>
+  {`My IP Address`}
+</NextLink>
+</RadixThemesLink>
+  <RadixThemesLink asChild={true} css={{"color": "black", "backgroundColor": "white", "padding": "15px", "borderRadius": "7px 7px 0px 0px"}}>
+  <NextLink href={`/globalping`} passHref={true}>
+  {`My Global Ping`}
+</NextLink>
+</RadixThemesLink>
+  <RadixThemesLink asChild={true} css={{"color": "rgba(34,46,58,.5)", "backgroundColor": "hsla(0,0%,100%,.5)", "padding": "15px", "borderRadius": "7px 7px 0px 0px"}}>
+  <NextLink href={`https://reflex.dev`} passHref={true}>
+  {`Track My Packet`}
+</NextLink>
+</RadixThemesLink>
+</RadixThemesFlex>
+</RadixThemesContainer>
+  <RadixThemesContainer>
+  <RadixThemesFlex align={`start`} css={{"flexDirection": "row"}} gap={`2`}>
+  <RadixThemesSelect.Root>
+  <RadixThemesSelect.Trigger/>
+  <RadixThemesSelect.Content>
+  <RadixThemesSelect.Group>
+  {``}
+  <RadixThemesSelect.Item value={`North America`}>
+  {`North America`}
+</RadixThemesSelect.Item>
+  <RadixThemesSelect.Item value={`South America`}>
+  {`South America`}
+</RadixThemesSelect.Item>
+  <RadixThemesSelect.Item value={`Africa`}>
+  {`Africa`}
+</RadixThemesSelect.Item>
+</RadixThemesSelect.Group>
+</RadixThemesSelect.Content>
+</RadixThemesSelect.Root>
+</RadixThemesFlex>
+</RadixThemesContainer>
+</Box>
+</Fragment>
 </Fragment>
   <NextHead>
   <title>

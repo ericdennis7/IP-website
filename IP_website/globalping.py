@@ -22,7 +22,7 @@ def globalping_page():
         # MAIN CONTAINER
         rx.desktop_only(
         rx.container(
-            rx.heading("Get your ping from anywhere!", size="9", margin_top="10vh", align="left"),
+            rx.heading("Get your ping from anywhere! 🌎", size="9", margin_top="10vh", align="left"),
             background_color="#f4f5f8",
             padding="50px 1em 100px 1em"
         ),
@@ -32,13 +32,13 @@ def globalping_page():
                 rx.link("My IP Address", 
                         href="/",
                         color="rgba(34,46,58,.5)",
-                        background_color="white", 
+                        background_color="hsla(0,0%,100%,.5)",
                         padding="15px", 
                         border_radius='7px 7px 0px 0px'),
                 rx.link("My Global Ping", 
                         href="/globalping",
                         color="black",
-                        background_color="hsla(0,0%,100%,.5)", 
+                        background_color="white", 
                         padding="15px", 
                         border_radius='7px 7px 0px 0px'),
                 rx.link("Track My Packet", 
@@ -51,5 +51,10 @@ def globalping_page():
             ),
             background_color="#f4f5f8",
         ),
+        rx.container(
+            rx.hstack(
+              rx.select(["North America", "South America", "Africa"])
+            ),
         ),
     ),
+)
