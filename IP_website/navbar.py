@@ -8,8 +8,8 @@ def navbar():
         ),
         rx.spacer(),
         rx.hstack(
-            rx.link("LinkedIn", color_scheme="blue", variant="soft", radius="medium", href="https://www.linkedin.com/in/ericdennis7/"),
-            rx.link("Donate", color_scheme="grass", variant="soft", radius="medium", href="https://www.linkedin.com/in/ericdennis7/"),
+            #rx.link("LinkedIn", color_scheme="blue", variant="soft", radius="medium", href="https://www.linkedin.com/in/ericdennis7/"),
+            #rx.link("Donate", color_scheme="grass", variant="soft", radius="medium", href="https://www.linkedin.com/in/ericdennis7/"),
             rx.menu.root(
                 rx.menu.trigger(
                     rx.button("Menu", background_color="black", color="white", variant="soft", radius="medium"),

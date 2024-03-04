@@ -1,18 +1,51 @@
 /** @jsxImportSource @emotion/react */
 
 
-import { Fragment } from "react"
-import { Button as RadixThemesButton, Card as RadixThemesCard, Container as RadixThemesContainer, DropdownMenu as RadixThemesDropdownMenu, Flex as RadixThemesFlex, Heading as RadixThemesHeading, Link as RadixThemesLink, Separator as RadixThemesSeparator, Strong as RadixThemesStrong, Text as RadixThemesText, Tooltip as RadixThemesTooltip } from "@radix-ui/themes"
-import NextLink from "next/link"
+import { Fragment, useContext } from "react"
+import { EventLoopContext } from "/utils/context"
+import { Event, getBackendURL, isTrue } from "/utils/state"
+import { Button as RadixThemesButton, Card as RadixThemesCard, Container as RadixThemesContainer, Dialog as RadixThemesDialog, DropdownMenu as RadixThemesDropdownMenu, Flex as RadixThemesFlex, Heading as RadixThemesHeading, Link as RadixThemesLink, Separator as RadixThemesSeparator, Strong as RadixThemesStrong, Text as RadixThemesText, Tooltip as RadixThemesTooltip } from "@radix-ui/themes"
+import env from "/env.json"
 import { Box } from "@chakra-ui/react"
+import NextLink from "next/link"
 import NextHead from "next/head"
 
 
+
+export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
+  const [addEvents, connectError] = useContext(EventLoopContext);
+
+
+  return (
+    <Fragment>
+  {isTrue(connectError !== null) ? (
+  <Fragment>
+  <RadixThemesDialog.Root open={connectError !== null}>
+  <RadixThemesDialog.Content>
+  <RadixThemesDialog.Title>
+  {`Connection Error`}
+</RadixThemesDialog.Title>
+  <RadixThemesText as={`p`}>
+  {`Cannot connect to server: `}
+  {(connectError !== null) ? connectError.message : ''}
+  {`. Check if server is reachable at `}
+  {getBackendURL(env.EVENT).href}
+</RadixThemesText>
+</RadixThemesDialog.Content>
+</RadixThemesDialog.Root>
+</Fragment>
+) : (
+  <Fragment/>
+)}
+</Fragment>
+  )
+}
 
 export default function Component() {
 
   return (
     <Fragment>
+  <Fragment_1762bb90abdb81b879b2a22edbbe01a1/>
   <Fragment>
   <RadixThemesFlex align={`center`} css={{"position": "fixed", "top": "0px", "backgroundColor": "white", "padding": "1em", "height": "4em", "width": "100%", "zIndex": "5", "borderBottom": "0.1px solid #eae7ec", "flexDirection": "row"}} gap={`2`}>
   <RadixThemesFlex align={`start`} css={{"flexDirection": "row"}} gap={`2`}>
@@ -23,16 +56,6 @@ export default function Component() {
 </RadixThemesFlex>
   <RadixThemesFlex css={{"flex": 1, "justifySelf": "stretch", "alignSelf": "stretch"}}/>
   <RadixThemesFlex align={`center`} css={{"flexDirection": "row"}} gap={`5`}>
-  <RadixThemesLink asChild={true} color={`blue`} css={{"variant": "soft", "radius": "medium"}}>
-  <NextLink href={`https://www.linkedin.com/in/ericdennis7/`} passHref={true}>
-  {`LinkedIn`}
-</NextLink>
-</RadixThemesLink>
-  <RadixThemesLink asChild={true} color={`grass`} css={{"variant": "soft", "radius": "medium"}}>
-  <NextLink href={`https://www.linkedin.com/in/ericdennis7/`} passHref={true}>
-  {`Donate`}
-</NextLink>
-</RadixThemesLink>
   <RadixThemesDropdownMenu.Root>
   <RadixThemesDropdownMenu.Trigger>
   <RadixThemesButton css={{"backgroundColor": "black", "color": "white"}} radius={`medium`} variant={`soft`}>
@@ -141,7 +164,8 @@ export default function Component() {
 </RadixThemesFlex>
 </RadixThemesContainer>
 </RadixThemesFlex>
-  <RadixThemesContainer>
+  <RadixThemesContainer css={{"height": "30px"}}/>
+  <RadixThemesContainer css={{"margin": "1em"}}>
   <RadixThemesFlex align={`start`} css={{"flexDirection": "row"}} gap={`2`}>
   <RadixThemesFlex align={`start`} css={{"flexDirection": "column"}} gap={`2`}>
   <RadixThemesHeading size={`7`}>
@@ -167,8 +191,8 @@ export default function Component() {
   <img css={{"width": "300px", "margin": "auto", "marginTop": "0px", "padding": "10px"}} src={`./what_is_an_ip_address.jpg`}/>
 </RadixThemesFlex>
 </RadixThemesContainer>
-  <RadixThemesContainer css={{"height": "70px"}}/>
-  <RadixThemesContainer css={{"height": "auto", "backgroundColor": "#f4f5f8", "marginTop": "30px", "marginBottom": "70px"}}>
+  <RadixThemesContainer css={{"height": "50px"}}/>
+  <RadixThemesContainer css={{"height": "auto", "backgroundColor": "#f4f5f8", "marginTop": "30px", "marginBottom": "70px", "padding": "1em"}}>
   <RadixThemesFlex align={`start`} css={{"flexDirection": "row"}} gap={`2`}>
   <RadixThemesFlex align={`start`} css={{"flexDirection": "column"}} gap={`2`}>
   <RadixThemesContainer css={{"width": "20px"}}/>
@@ -197,7 +221,7 @@ export default function Component() {
 </RadixThemesFlex>
 </RadixThemesFlex>
 </RadixThemesContainer>
-  <RadixThemesContainer css={{"padding": "1em"}}>
+  <RadixThemesContainer css={{"margin": "1em"}}>
   <RadixThemesFlex align={`start`} css={{"flexDirection": "row"}} gap={`2`}>
   <RadixThemesContainer css={{"height": "30px"}}/>
   <img css={{"width": "300px", "margin": "auto", "marginTop": "0px", "padding": "10px"}} src={`./what_is_vpn.jpg`}/>

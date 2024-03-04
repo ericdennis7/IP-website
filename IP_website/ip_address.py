@@ -61,8 +61,6 @@ def ip_address_page():
 
     ### CLASSES / MANAGING APP EXTRAS) ###
 
-    class State(rx.State):
-        pass
 
     ### MAIN APP / HOMEPAGE ###
 
@@ -176,6 +174,7 @@ def ip_address_page():
     ),
         
     # LEARNING ABOUT IP ADDRESSES
+    rx.container(height="30px"),
     rx.container(
         rx.hstack(
             rx.vstack(
@@ -198,8 +197,9 @@ def ip_address_page():
             ),
             rx.image(src="./what_is_an_ip_address.jpg", width="300px", margin="auto", margin_top="0px", padding="10px")
         ),
+        margin="1em"
     ),
-    rx.container(height="70px"),
+    rx.container(height="50px"),
     # GRAY SECTION OF INFO
     rx.container(
         rx.hstack(
@@ -229,7 +229,9 @@ def ip_address_page():
         height="auto",
         background_color="#f4f5f8",
         margin_top="30px",
-        margin_bottom="70px"),
+        margin_bottom="70px",
+        padding="1em"
+        ),
     
     # MAIN INFORMATION PART WITH IMAGES
     rx.container(
@@ -254,7 +256,7 @@ def ip_address_page():
             ),
             rx.container(width="20px"),
         ),
-        padding="1em"
+        margin="1em"
         ),
     ),
         
