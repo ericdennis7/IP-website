@@ -5,12 +5,64 @@
 
 ### IMPORTS ###
 
+import time
 import json
 import requests
 import reflex as rx
 import myipaddress as myip
+
     
-def probes():
+### CLASSES ###   
+
+class FormInputState(rx.State):
+    form_data: dict = {}
+    results: str = ""
+
+    def handle_submit(self, form_data: dict):
+        self.form_data = form_data
+        
+        url = "https://api.globalping.io/v1/measurements"
+        
+        data = {
+            "type": "ping",
+            "target": "cdn.jsdelivr.net",
+            "locations": [
+                {
+                "magic": "US",
+                "limit": 4
+                }
+            ]
+            }
+        
+        headers = {"Content-Type": "application/json"}
+        
+        try:
+            response = requests.post(url, json=data, headers=headers)
+            response.raise_for_status()  # Raises an error for 4xx or 5xx status codes
+            measurement_id = response.json().get('id')  # Assuming the response contains an 'id'
+            time.sleep(5)
+            result_response = requests.get(f"https://api.globalping.io/v1/measurements/{measurement_id}")
+
+            # Assuming you want to display the response content as a string
+            self.results = result_response.text
+
+        except requests.exceptions.RequestException as e:
+            print("Error:", e)
+            return None
+
+        
+class TextfieldControlled(rx.State):
+    address: str = f"{myip.public_ip()}"
+    location: str = "world"
+    testcount: str = "5"
+    packetcount: str = "4"
+    
+    
+### MAIN PAGE FUNCTION ###
+
+def globalping_page():
+    
+    def probes():
         url = "https://api.globalping.io/v1/probes"
         headers = {"accept": "application/json"}
 
@@ -40,18 +92,6 @@ def probes():
         cities = list(set(cities))
         
         return continents, regions, countries, cities
-    
-class SetterState(rx.State):
-    selected: str = "World"
-    
-    def return_location(self):
-        myip_info = myip.info()
-        continents, regions, countries, cities = probes()
-
-    
-### MAIN PAGE FUNCTION ###
-
-def globalping_page():
     
     myip_info = myip.info()
     continents, regions, countries, cities = probes()
@@ -95,40 +135,44 @@ def globalping_page():
         ),
         rx.center(
             rx.container(
-                rx.flex(
-                    rx.box(
-                        rx.text("Target Address", weight="medium"),
-                        rx.container(height="5px"),
-                        rx.input(value=f"{myip_info.get('ip')}"),
-                        width="30%",
+                rx.form.root(
+                    rx.flex(
+                        rx.box(
+                            rx.text("Target Address", weight="medium", required=True),
+                            rx.container(height="5px"),
+                            rx.input(value=TextfieldControlled.address, on_change=TextfieldControlled.set_address, name="ip_domain"),
+                            width="30%",
+                        ),
+                        rx.box(
+                            rx.text("Location(s)", weight="medium", required=True),
+                            rx.container(height="5px"),
+                            rx.input(value=TextfieldControlled.location, on_change=TextfieldControlled.set_location, name="location"),
+                            width="25%",
+                        ),
+                        rx.box(
+                            rx.text("Test", weight="medium", required=True),
+                            rx.container(height="5px"),
+                            rx.input(value=TextfieldControlled.testcount, on_change=TextfieldControlled.set_testcount, name="test_count"),
+                            width="15%",
+                        ),
+                        rx.box(
+                            rx.text("Packets", weight="medium", required=True),
+                            rx.container(height="5px"),
+                            rx.input(value=TextfieldControlled.packetcount, on_change=TextfieldControlled.set_packetcount, name="packet_count"),
+                            width="15%",
+                        ),
+                        rx.box(
+                            rx.text("⠀"),
+                            rx.container(height="5px"),
+                            rx.button("Run Test", color_scheme="grass", type="submit"),
+                            width="10%",
+                        ),
+                        spacing="2",
+                        width="100%"
                     ),
-                    rx.box(
-                        rx.text("Location(s)", weight="medium"),
-                        rx.container(height="5px"),
-                        rx.input(value="World"),
-                        width="25%",
-                    ),
-                    rx.box(
-                        rx.text("Test", weight="medium"),
-                        rx.container(height="5px"),
-                        rx.input(value="5"),
-                        width="15%",
-                    ),
-                    rx.box(
-                        rx.text("Packets", weight="medium"),
-                        rx.container(height="5px"),
-                        rx.input(value="3"),
-                        width="15%",
-                    ),
-                    rx.box(
-                        rx.text("⠀"),
-                        rx.container(height="5px"),
-                        rx.button("Run Test", color_scheme="grass"),
-                        width="10%",
-                    ),
-                    spacing="2",
-                    width="100%"
+                    on_submit=FormInputState.handle_submit,
                 ),
+                rx.text(FormInputState.results.to_string()),
                 margin_top="3em",
                 width="100%"
             ),
