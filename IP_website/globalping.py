@@ -11,12 +11,15 @@ import requests
 import reflex as rx
 import myipaddress as myip
 
+regions_list = []
     
 ### CLASSES ###   
 
 class FormInputState(rx.State):
     form_data: dict = {}
     results: str = ""
+    cities: list = []
+    numbers: list = ["1", "2", "3"]
 
     def handle_submit(self, form_data: dict):
         self.form_data = form_data
@@ -25,31 +28,34 @@ class FormInputState(rx.State):
         
         data = {
             "type": "ping",
-            "target": "cdn.jsdelivr.net",
+            "target": f"{self.form_data.get('ip_domain')}",
             "locations": [
                 {
-                "magic": "US",
-                "limit": 4
+                "magic": f"{self.form_data.get('location')}",
+                "limit": f"{self.form_data.get('test_count')}"
                 }
             ]
-            }
+        }
         
         headers = {"Content-Type": "application/json"}
         
         try:
             response = requests.post(url, json=data, headers=headers)
-            response.raise_for_status()  # Raises an error for 4xx or 5xx status codes
-            measurement_id = response.json().get('id')  # Assuming the response contains an 'id'
+            response.raise_for_status()
+            measurement_id = response.json().get('id')
             time.sleep(5)
             result_response = requests.get(f"https://api.globalping.io/v1/measurements/{measurement_id}")
+            
+            result_data = json.loads(result_response.text)
+            
+            cities = [location["probe"]["city"] for location in result_data.get("results", [])]
 
-            # Assuming you want to display the response content as a string
             self.results = result_response.text
-
+            self.cities = cities
+            
         except requests.exceptions.RequestException as e:
             print("Error:", e)
             return None
-
         
 class TextfieldControlled(rx.State):
     address: str = f"{myip.public_ip()}"
@@ -152,7 +158,7 @@ def globalping_page():
                         rx.box(
                             rx.text("Test", weight="medium", required=True),
                             rx.container(height="5px"),
-                            rx.input(value=TextfieldControlled.testcount, on_change=TextfieldControlled.set_testcount, name="test_count"),
+                            rx.input(value=TextfieldControlled.testcount, on_change=TextfieldControlled.set_testcount, name="test_count", max_length="1"),
                             width="15%",
                         ),
                         rx.box(
@@ -172,7 +178,19 @@ def globalping_page():
                     ),
                     on_submit=FormInputState.handle_submit,
                 ),
-                rx.text(FormInputState.results.to_string()),
+                rx.code_block(FormInputState.results, language="json", wrap_long_lines=True),
+                
+                rx.container(
+                    rx.foreach(
+                        FormInputState.cities,
+                        lambda item: rx.box(
+                        item,
+                        color="red"  
+                        ),
+                    ),
+                    background_color="#f4f5f8"
+                ),
+                
                 margin_top="3em",
                 width="100%"
             ),

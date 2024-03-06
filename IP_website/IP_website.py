@@ -51,6 +51,7 @@ def global_ping_page():
         globalping_page()
     )
     
+
 ### CREATING THE APP ###
 
 app = rx.App(theme=rx.theme(accent_color="blue"), style=style)
