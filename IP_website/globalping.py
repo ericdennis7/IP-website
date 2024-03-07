@@ -7,6 +7,7 @@
 
 import time
 import json
+import folium
 import requests
 import reflex as rx
 import myipaddress as myip

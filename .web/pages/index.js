@@ -134,7 +134,7 @@ export default function Component() {
   {`IP Address:`}
 </RadixThemesText>
   <RadixThemesText as={`p`} size={`5`} weight={`bold`}>
-  {`185.236.200.243`}
+  {`149.88.25.130`}
 </RadixThemesText>
   <RadixThemesContainer css={{"height": "5px"}}/>
   <RadixThemesText as={`p`} size={`3`} weight={`light`}>
@@ -155,7 +155,7 @@ export default function Component() {
   {`Internet Service Provider (org):`}
 </RadixThemesText>
   <RadixThemesText as={`p`} size={`5`} weight={`bold`}>
-  {`M247 Europe SRL (M247 Los Angeles)`}
+  {`Datacamp Limited (Datacamp Limited)`}
 </RadixThemesText>
   <RadixThemesContainer css={{"height": "5px"}}/>
 </RadixThemesFlex>
@@ -303,7 +303,7 @@ export default function Component() {
   {`IP Address:`}
 </RadixThemesText>
   <RadixThemesText as={`p`} size={`5`} weight={`bold`}>
-  {`185.236.200.243`}
+  {`149.88.25.130`}
 </RadixThemesText>
   <RadixThemesContainer css={{"height": "5px"}}/>
   <RadixThemesText as={`p`} size={`3`} weight={`light`}>
@@ -324,7 +324,7 @@ export default function Component() {
   {`Internet Service Provider (org):`}
 </RadixThemesText>
   <RadixThemesText as={`p`} size={`5`} weight={`bold`}>
-  {`M247 Europe SRL (M247 Los Angeles)`}
+  {`Datacamp Limited (Datacamp Limited)`}
 </RadixThemesText>
   <RadixThemesContainer css={{"height": "5px"}}/>
 </RadixThemesFlex>
