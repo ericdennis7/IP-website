@@ -1,1 +1,0 @@
-export default {"styles": {"global": {":root": {}, "body": {".rt-Card:where(.rt-variant-surface)::after": {"inset": "unset"}, ".rt-Card::after": {"display": "none"}, ".rt-CardInner": {"padding": "0px"}, "@media only screen and (max-width: 768px)": {".rt-Card": {"width": "100%"}}}}}}
