@@ -9,10 +9,131 @@ import time
 import json
 import folium
 import requests
+import pandas as pd
 import reflex as rx
 import myipaddress as myip
+import plotly.express as px
 
-regions_list = []
+
+def globalping_map():
+        
+        url = "https://api.globalping.io/v1/measurements"
+        
+        data = {
+            "type": "ping",
+            "target": f"{myip.public_ip()}",
+            "locations": [
+                {
+                "magic": "world",
+                "limit": 100
+                }
+            ]
+        }
+        
+        headers = {"Content-Type": "application/json"}
+    
+        response = requests.post(url, json=data, headers=headers)
+        measurement_id = response.json().get('id')
+        response.raise_for_status()
+        time.sleep(10)
+        result_response = requests.get(f"https://api.globalping.io/v1/measurements/{measurement_id}")
+        result_data = json.loads(result_response.text)
+
+        # Extracting required data into lists.
+        continents = []
+        regions = []
+        countries = []
+        cities = []
+        longitudes = []
+        latitudes = []
+        min_values = []
+        max_values = []
+        avg_values = []
+
+        # Inserting results into their appropriate lists.
+        for result in result_data['results']:
+            continents.append(result['probe']['continent'])
+            regions.append(result['probe']['region'])
+            countries.append(result['probe']['country'])
+            cities.append(result['probe']['city'])
+            longitudes.append(result['probe']['longitude'])
+            latitudes.append(result['probe']['latitude'])
+            min_values.append(result['result']['stats']['min'])
+            max_values.append(result['result']['stats']['max'])
+            avg_values.append(result['result']['stats']['avg'])
+
+        # Creating a pandas dataframe.
+        df = pd.DataFrame({
+            'Continent': continents,
+            'Region': regions,
+            'Country': countries,
+            'City': cities,
+            'Longitude': longitudes,
+            'Latitude': latitudes,
+            'Min': min_values,
+            'Max': max_values,
+            'Avg': avg_values
+        })
+
+        # Plotting on a natural earth projection map using Plotly Express.
+        fig = px.scatter_geo(df, 
+                            lon='Longitude', 
+                            lat='Latitude',
+                            hover_name='Country', 
+                            color='Avg',
+                            color_continuous_scale=['#65DD91', '#F3CF64', '#DA3B3A'],
+                            projection='equirectangular',
+                            hover_data = ["Min", "Max", "Avg", "Continent", "Region", "Country", "City"]
+        )
+
+        # Extra styling for the graph.
+        fig.update_geos(
+            showcountries=True,
+            countrycolor = "White",
+            bgcolor="#0E1117",
+            
+        )
+
+        fig.update_traces(
+            marker = dict(size = 13, 
+                          opacity = 0.7,
+                          line = dict(color = '#FFF', width = 1)
+        ))
+
+        fig.update_layout(
+            margin=dict(l=0, r=0, b=0, t=0, pad=0),
+            geo = dict(
+                showframe = False,
+                framecolor = '#0E1117',
+                showcoastlines = True,
+                showcountries = True,
+                coastlinecolor = "#606163",
+                countrycolor = "#606163",
+                showland = True,
+                landcolor = "#161a24"
+            ),
+            width = 1200,
+            height = 600
+        )
+
+        fig.update_coloraxes(
+            showscale = False
+        )
+        
+        fig.add_scattergeo(
+            lat=[39.0395],
+            lon = [-77.4918],
+            marker_color = 'gold',
+            marker_symbol = 'star',
+            marker_size = 15,
+            marker_line_color = '#FFF',
+            marker_line_width = 1,
+            text = 'Server Location: Virginia, USA',
+            showlegend= False
+        )
+
+        return fig
+
     
 ### CLASSES ###   
 
@@ -179,18 +300,8 @@ def globalping_page():
                     ),
                     on_submit=FormInputState.handle_submit,
                 ),
-                rx.code_block(FormInputState.results, language="json", wrap_long_lines=True),
                 
-                rx.container(
-                    rx.foreach(
-                        FormInputState.cities,
-                        lambda item: rx.box(
-                        item,
-                        color="red"  
-                        ),
-                    ),
-                    background_color="#f4f5f8"
-                ),
+                rx.plotly(data=globalping_map(), height="1000px", width="100%", use_resize_handler=True, layout={"width": "1200", "height": "800"}),
                 
                 margin_top="3em",
                 width="100%"
