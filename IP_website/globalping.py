@@ -8,6 +8,7 @@
 import time
 import json
 import folium
+import asyncio
 import requests
 import pandas as pd
 import reflex as rx
@@ -15,7 +16,7 @@ import myipaddress as myip
 import plotly.express as px
 
 
-def globalping_map():
+def globalping():
         
         url = "https://api.globalping.io/v1/measurements"
         
@@ -44,8 +45,6 @@ def globalping_map():
         regions = []
         countries = []
         cities = []
-        longitudes = []
-        latitudes = []
         min_values = []
         max_values = []
         avg_values = []
@@ -56,135 +55,41 @@ def globalping_map():
             regions.append(result['probe']['region'])
             countries.append(result['probe']['country'])
             cities.append(result['probe']['city'])
-            longitudes.append(result['probe']['longitude'])
-            latitudes.append(result['probe']['latitude'])
             min_values.append(result['result']['stats']['min'])
             max_values.append(result['result']['stats']['max'])
             avg_values.append(result['result']['stats']['avg'])
 
         # Creating a pandas dataframe.
         df = pd.DataFrame({
-            'Continent': continents,
-            'Region': regions,
-            'Country': countries,
             'City': cities,
-            'Longitude': longitudes,
-            'Latitude': latitudes,
+            'Country': countries,
+            'Region': regions,
+            'Continent': continents,
+            'Avg': avg_values,
             'Min': min_values,
             'Max': max_values,
-            'Avg': avg_values
         })
 
-        # Plotting on a natural earth projection map using Plotly Express.
-        fig = px.scatter_geo(df, 
-                            lon='Longitude', 
-                            lat='Latitude',
-                            hover_name='Country', 
-                            color='Avg',
-                            color_continuous_scale=['#65DD91', '#F3CF64', '#DA3B3A'],
-                            projection='equirectangular',
-                            hover_data = ["Min", "Max", "Avg", "Continent", "Region", "Country", "City"]
-        )
-
-        # Extra styling for the graph.
-        fig.update_geos(
-            showcountries=True,
-            countrycolor = "White",
-            bgcolor="#0E1117",
-            
-        )
-
-        fig.update_traces(
-            marker = dict(size = 13, 
-                          opacity = 0.7,
-                          line = dict(color = '#FFF', width = 1)
-        ))
-
-        fig.update_layout(
-            margin=dict(l=0, r=0, b=0, t=0, pad=0),
-            geo = dict(
-                showframe = False,
-                framecolor = '#0E1117',
-                showcoastlines = True,
-                showcountries = True,
-                coastlinecolor = "#606163",
-                countrycolor = "#606163",
-                showland = True,
-                landcolor = "#161a24"
-            ),
-            width = 1200,
-            height = 600
-        )
-
-        fig.update_coloraxes(
-            showscale = False
-        )
+        return df
         
-        fig.add_scattergeo(
-            lat=[39.0395],
-            lon = [-77.4918],
-            marker_color = 'gold',
-            marker_symbol = 'star',
-            marker_size = 15,
-            marker_line_color = '#FFF',
-            marker_line_width = 1,
-            text = 'Server Location: Virginia, USA',
-            showlegend= False
-        )
-
-        return fig
-
-    
-### CLASSES ###   
-
+### CLASSES ###
+        
 class FormInputState(rx.State):
-    form_data: dict = {}
-    results: str = ""
-    cities: list = []
-    numbers: list = ["1", "2", "3"]
+    ping_results: pd.DataFrame = pd.DataFrame()
+    loading: bool = False
 
-    def handle_submit(self, form_data: dict):
-        self.form_data = form_data
-        
-        url = "https://api.globalping.io/v1/measurements"
-        
-        data = {
-            "type": "ping",
-            "target": f"{self.form_data.get('ip_domain')}",
-            "locations": [
-                {
-                "magic": f"{self.form_data.get('location')}",
-                "limit": f"{self.form_data.get('test_count')}"
-                }
-            ]
-        }
-        
-        headers = {"Content-Type": "application/json"}
-        
-        try:
-            response = requests.post(url, json=data, headers=headers)
-            response.raise_for_status()
-            measurement_id = response.json().get('id')
-            time.sleep(5)
-            result_response = requests.get(f"https://api.globalping.io/v1/measurements/{measurement_id}")
-            
-            result_data = json.loads(result_response.text)
-            
-            cities = [location["probe"]["city"] for location in result_data.get("results", [])]
+    @rx.background
+    async def handle_submit(self):
+        async with self:
+            self.loading = True
 
-            self.results = result_response.text
-            self.cities = cities
-            
-        except requests.exceptions.RequestException as e:
-            print("Error:", e)
-            return None
+        # Fetch ping results in a non-blocking way
+        results = await asyncio.to_thread(globalping)
+
+        async with self:
+            self.ping_results = results
+            self.loading = False
         
-class TextfieldControlled(rx.State):
-    address: str = f"{myip.public_ip()}"
-    location: str = "world"
-    testcount: str = "5"
-    packetcount: str = "4"
-    
     
 ### MAIN PAGE FUNCTION ###
 
@@ -263,48 +168,18 @@ def globalping_page():
         ),
         rx.center(
             rx.container(
-                rx.form.root(
-                    rx.flex(
-                        rx.box(
-                            rx.text("Target Address", weight="medium", required=True),
-                            rx.container(height="5px"),
-                            rx.input(value=TextfieldControlled.address, on_change=TextfieldControlled.set_address, name="ip_domain"),
-                            width="30%",
-                        ),
-                        rx.box(
-                            rx.text("Location(s)", weight="medium", required=True),
-                            rx.container(height="5px"),
-                            rx.input(value=TextfieldControlled.location, on_change=TextfieldControlled.set_location, name="location"),
-                            width="25%",
-                        ),
-                        rx.box(
-                            rx.text("Test", weight="medium", required=True),
-                            rx.container(height="5px"),
-                            rx.input(value=TextfieldControlled.testcount, on_change=TextfieldControlled.set_testcount, name="test_count", max_length="1"),
-                            width="15%",
-                        ),
-                        rx.box(
-                            rx.text("Packets", weight="medium", required=True),
-                            rx.container(height="5px"),
-                            rx.input(value=TextfieldControlled.packetcount, on_change=TextfieldControlled.set_packetcount, name="packet_count"),
-                            width="15%",
-                        ),
-                        rx.box(
-                            rx.text("⠀"),
-                            rx.container(height="5px"),
-                            rx.button("Run Test", color_scheme="grass", type="submit"),
-                            width="10%",
-                        ),
-                        spacing="2",
-                        width="100%"
-                    ),
-                    on_submit=FormInputState.handle_submit,
+                rx.button("Get my globalping!", on_click=FormInputState.handle_submit),
+                rx.cond(
+                    FormInputState.loading,
+                    rx.chakra.circular_progress(is_indeterminate=True),
+                    rx.container(height="0px"),
                 ),
-                
-                rx.plotly(data=globalping_map(), use_resize_handler=True, layout={"width": "1200", 
-                                                                                  "height": "800", 
-                                                                                  "color_continuous_scale": "['#65DD91', '#F3CF64', '#DA3B3A']"}),
-                
+                rx.data_table(
+                    data=FormInputState.ping_results,
+                    search=True,
+                    sort=True,
+                    pagination=True
+                ),
                 margin_top="3em",
                 width="100%"
             ),
