@@ -10,6 +10,7 @@ import json
 import folium
 import asyncio
 import requests
+import pycountry
 import pandas as pd
 import reflex as rx
 import myipaddress as myip
@@ -18,76 +19,89 @@ import plotly.express as px
 
 def globalping():
         
-        url = "https://api.globalping.io/v1/measurements"
-        
-        data = {
-            "type": "ping",
-            "target": f"{myip.public_ip()}",
-            "locations": [
-                {
-                "magic": "world",
-                "limit": 100
-                }
-            ]
-        }
-        
-        headers = {"Content-Type": "application/json"}
+    url = "https://api.globalping.io/v1/measurements"
     
-        response = requests.post(url, json=data, headers=headers)
-        measurement_id = response.json().get('id')
-        response.raise_for_status()
-        time.sleep(10)
-        result_response = requests.get(f"https://api.globalping.io/v1/measurements/{measurement_id}")
-        result_data = json.loads(result_response.text)
+    data = {
+        "type": "ping",
+        "target": f"{myip.public_ip()}",
+        "locations": [
+            {
+            "magic": "world",
+            "limit": 100
+            }
+        ]
+    }
+    
+    headers = {"Content-Type": "application/json"}
 
-        # Extracting required data into lists.
-        continents = []
-        regions = []
-        countries = []
-        cities = []
-        min_values = []
-        max_values = []
-        avg_values = []
+    response = requests.post(url, json=data, headers=headers)
+    measurement_id = response.json().get('id')
+    response.raise_for_status()
+    time.sleep(10)
+    result_response = requests.get(f"https://api.globalping.io/v1/measurements/{measurement_id}")
+    result_data = json.loads(result_response.text)
 
-        # Inserting results into their appropriate lists.
-        for result in result_data['results']:
-            continents.append(result['probe']['continent'])
-            regions.append(result['probe']['region'])
-            countries.append(result['probe']['country'])
-            cities.append(result['probe']['city'])
-            min_values.append(result['result']['stats']['min'])
-            max_values.append(result['result']['stats']['max'])
-            avg_values.append(result['result']['stats']['avg'])
+    # Extracting required data into lists.
+    continents = []
+    regions = []
+    countries = []
+    countries_full = []
+    cities = []
+    min_values = []
+    max_values = []
+    avg_values = []
 
-        # Creating a pandas dataframe.
-        df = pd.DataFrame({
-            'City': cities,
-            'Country': countries,
-            'Region': regions,
-            'Continent': continents,
-            'Avg': avg_values,
-            'Min': min_values,
-            'Max': max_values,
-        })
+    # Inserting results into their appropriate lists.
+    for result in result_data['results']:
+        continents.append(result['probe']['continent'])
+        regions.append(result['probe']['region'])
+        countries.append(result['probe']['country'])
+        cities.append(result['probe']['city'])
+        min_values.append(result['result']['stats']['min'])
+        max_values.append(result['result']['stats']['max'])
+        avg_values.append(result['result']['stats']['avg'])
+        
+    for code in countries:
+        try:
+            country = pycountry.countries.get(alpha_2=code.upper())
+            countries_full.append(country.name)
+        except AttributeError:
+            # If country is not found, append the original code
+            countries_full.append(code)
 
-        return df
+    # Creating a pandas dataframe.
+    df = pd.DataFrame({
+        'City': cities,
+        'Country': countries_full,
+        'Region': regions,
+        'Continent': continents,
+        'Avg in ms': avg_values,
+        'Min in ms': min_values,
+        'Max in ms': max_values,
+    })
+
+    return df
         
 ### CLASSES ###
         
 class FormInputState(rx.State):
     ping_results: pd.DataFrame = pd.DataFrame()
     loading: bool = False
+    show_data: bool = False
+    show_initial: bool = True
 
     @rx.background
     async def handle_submit(self):
         async with self:
             self.loading = True
+            self.show_initial = False
 
         # Fetch ping results in a non-blocking way
         results = await asyncio.to_thread(globalping)
 
         async with self:
             self.ping_results = results
+            self.show_data = True
             self.loading = False
         
     
@@ -95,45 +109,13 @@ class FormInputState(rx.State):
 
 def globalping_page():
     
-    def probes():
-        url = "https://api.globalping.io/v1/probes"
-        headers = {"accept": "application/json"}
-
-        response = requests.get(url, headers=headers)
-
-        if response.status_code == 200:
-            data = response.json()
-            
-        continents = []
-        regions = []
-        countries = []
-        cities = []
-            
-        for entry in data:
-            location = entry.get('location', {})
-            continents.append(location.get('continent'))
-            regions.append(location.get('region'))
-            countries.append(location.get('country'))
-            cities.append(location.get('city'))
-        else:
-            pass
-            
-        # Remove duplicates using set
-        continents = list(set(continents))
-        regions = list(set(regions))
-        countries = list(set(countries))
-        cities = list(set(cities))
-        
-        return continents, regions, countries, cities
-    
     myip_info = myip.info()
-    continents, regions, countries, cities = probes()
 
     ### CREATING PAGE ###
     
     return rx.fragment(
         # MAIN CONTAINER
-        rx.desktop_only(
+        #rx.desktop_only(
         rx.container(
             rx.heading("Get your ping from anywhere! 🌎", size="9", margin_top="10vh", align="left"),
             background_color="#f4f5f8",
@@ -168,23 +150,51 @@ def globalping_page():
         ),
         rx.center(
             rx.container(
-                rx.button("Get my globalping!", on_click=FormInputState.handle_submit),
+                rx.container(height="20px"),
+                rx.heading("How does this work?"),
+                rx.container(height="20px"),
+                rx.text("""
+                    Using the awesome features of jsDelivr Globalping, this cool web tool will randomly pick 100 spots across 
+                    the globe and gather the ping times (in milliseconds) from your current IP address. To get started, just click "Run Globalping Test." 
+                    It only takes around 10 seconds to gather and show your results. Feel free to run it again whenever you want!
+                    """,
+                    wrap="wrap", width="100%"),
+                rx.container(height="20px"),
+                rx.button("Run Globalping Test!", on_click=FormInputState.handle_submit, size="3"),
+                rx.container(height="20px"),
                 rx.cond(
                     FormInputState.loading,
-                    rx.chakra.circular_progress(is_indeterminate=True),
-                    rx.container(height="0px"),
+                    rx.chakra.stack(
+                    rx.chakra.skeleton_text(
+                        no_of_lines=25,
+                    ),
+                    width="100%",
                 ),
-                rx.data_table(
-                    data=FormInputState.ping_results,
-                    search=True,
-                    sort=True,
-                    pagination=True
+                rx.container(height="0px"),
                 ),
-                margin_top="3em",
-                width="100%"
+                rx.cond(
+                    FormInputState.show_data,
+                    rx.data_table(
+                        data=FormInputState.ping_results,
+                        search=True,
+                        sort=True,
+                    ),
+                rx.cond(
+                    FormInputState.show_initial,
+                    rx.container(
+                        rx.text("Your ping results will be displayed here!", padding="1em", text_align="center"),
+                        background_color="#f4f5f8",
+                        border_radius="7px",
+                        margin_top="20px"
+                    ),
+                    rx.container()
+                ),
+            ),
+            margin_top="3em",
+            width="100%"
             ),
             align="center",
             margin="1em",
-        ),
+        #),
     ),
 )

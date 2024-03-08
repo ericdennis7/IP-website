@@ -23,7 +23,7 @@ function AppWrap({children}) {
     <ChakraProvider theme={extendTheme(theme)}>
   <ChakraColorModeProvider>
   <RadixThemesColorModeProvider>
-  <RadixThemesTheme accentColor={`blue`} css={{...theme.styles.global[':root'], ...theme.styles.global.body}}>
+  <RadixThemesTheme accentColor={`grass`} css={{...theme.styles.global[':root'], ...theme.styles.global.body}}>
   <Fragment>
   {children}
 </Fragment>

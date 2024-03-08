@@ -61,6 +61,6 @@ def global_ping_page():
 
 ### CREATING THE APP ###
 
-app = rx.App(theme=rx.theme(accent_color="blue"), style=style)
+app = rx.App(theme=rx.theme(accent_color="grass"), style=style)
 app.add_page(ip_page, route="/")
 app.add_page(global_ping_page, route="/globalping")
