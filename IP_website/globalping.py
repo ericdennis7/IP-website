@@ -211,7 +211,7 @@ def globalping_page():
             countries.append(location.get('country'))
             cities.append(location.get('city'))
         else:
-            print(f"Error: {response.status_code}")
+            pass
             
         # Remove duplicates using set
         continents = list(set(continents))
@@ -301,7 +301,9 @@ def globalping_page():
                     on_submit=FormInputState.handle_submit,
                 ),
                 
-                rx.plotly(data=globalping_map(), height="1000px", width="100%", use_resize_handler=True, layout={"width": "1200", "height": "800"}),
+                rx.plotly(data=globalping_map(), use_resize_handler=True, layout={"width": "1200", 
+                                                                                  "height": "800", 
+                                                                                  "color_continuous_scale": "['#65DD91', '#F3CF64', '#DA3B3A']"}),
                 
                 margin_top="3em",
                 width="100%"
