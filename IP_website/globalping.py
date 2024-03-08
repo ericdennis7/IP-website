@@ -50,6 +50,10 @@ def globalping():
     min_values = []
     max_values = []
     avg_values = []
+    total = []
+    loss = []
+    rcv = []
+    drop = []
 
     # Inserting results into their appropriate lists.
     for result in result_data['results']:
@@ -60,6 +64,10 @@ def globalping():
         min_values.append(result['result']['stats']['min'])
         max_values.append(result['result']['stats']['max'])
         avg_values.append(result['result']['stats']['avg'])
+        total.append(result['result']['stats']['total'])
+        rcv.append(result['result']['stats']['rcv'])
+        loss.append(result['result']['stats']['loss'])
+        drop.append(result['result']['stats']['drop'])
         
     for code in countries:
         try:
@@ -78,6 +86,10 @@ def globalping():
         'Avg': avg_values,
         'Min': min_values,
         'Max': max_values,
+        'Tot': total,
+        'Rcv': rcv,
+        'Los': loss,
+        'Dpd': drop
     })
 
     return df
@@ -246,6 +258,7 @@ def globalping_page():
                     wrap="wrap"
                 ),
             margin_top="3em",
+            margin_bottom="3em",
             width="100%"
             ),
             align="center",
