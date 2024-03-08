@@ -189,35 +189,62 @@ def globalping_page():
                         rx.text("Your ping results will be displayed here!", padding="1em", text_align="center"),
                         background_color="#f4f5f8",
                         border_radius="7px",
-                        margin_top="20px"
+                        margin_top="20px",
+                        width="100%"
                     ),
                     rx.container()
                 ),
             ),
             rx.container(height="40px"),
-            rx.flex(
                 rx.container(
                     rx.heading("What is ping?"),
                     rx.container(height="20px"),
                     rx.text("""Ping is a measure of the round-trip time it takes for a data packet to travel from the source to the destination and back again. The "good" or acceptable ping range can vary depending on the specific use case and requirements. Here are general categories for ping ranges:""", wrap="wrap", width="100%"),
                     rx.container(height="10px"),
-                    rx.heading("Low Ping (0-30 ms):", size="3"),
-                    rx.text("""- Excellent for online gaming, especially for fast-paced and competitive games.Ideal for real-time applications, video conferencing, and voice-over-IP (VoIP).""", wrap="wrap", width="100%"),
-                    rx.container(height="10px"),
-                    rx.heading("Medium Ping (30-100 ms):", size="3"), 
-                    rx.text("""- Acceptable for most online activities, including gaming, video streaming, and general web browsing. Still suitable for many real-time applications, but slight delays may be noticed.""", wrap="wrap", width="100%"),    
-                    rx.container(height="10px"),
-                    rx.heading("High Ping (100-200 ms):", size="3"),
-                    rx.text("""- Noticeable delays may be experienced, especially in online gaming and real-time applications. Can still be acceptable for activities like web browsing and video streaming, but some lag may be apparent.""", wrap="wrap", width="100%"), 
-                    rx.container(height="10px"),   
-                    rx.heading("Very High Ping (200+ ms):", size="3"),   
-                    rx.text("""- Significant delays are likely, impacting online gaming and real-time applications. Web browsing and video streaming may be affected, with potential buffering and loading delays.""", wrap="wrap", width="100%"),
-                    rx.container(height="10px"),
+                    rx.unordered_list(
+                        rx.container(height="7px"),
+                        rx.list_item(
+                            rx.icon(
+                                "laugh",
+                                color="purple",
+                                style={"display": "inline"},
+                            ),
+                            " Low Ping (0-30 ms)",
+                        ),
+                        rx.container(height="7px"),
+                        rx.list_item(
+                            rx.icon(
+                                "smile",
+                                color="green",
+                                style={"display": "inline"},
+                            ),
+                            " Medium Ping (30-100 ms)",
+                        ),
+                        rx.container(height="7px"),
+                        rx.list_item(
+                            rx.icon(
+                                "meh",
+                                color="orange",
+                                style={"display": "inline"},
+                            ),
+                            " High Ping (100-200 ms)",
+                        ),
+                        rx.container(height="7px"),
+                        rx.list_item(
+                            rx.icon(
+                                "frown",
+                                color="red",
+                                style={"display": "inline"},
+                            ),
+                            " Very High Ping (200+ ms)",
+                        ),
+                        list_style_type="none",
+                    ),
                     bg="#f4f5f8",
                     border_radius="7px",
-                    padding="1em"  
+                    padding="1em",
+                    wrap="wrap"
                 ),
-            ),
             margin_top="3em",
             width="100%"
             ),
