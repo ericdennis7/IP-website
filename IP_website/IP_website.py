@@ -15,6 +15,7 @@ import myipaddress as myip
 from .navbar import navbar
 from .ip_address import ip_address_page
 from .globalping import globalping_page
+from .traceroute import traceroute_page
 
 
 ### CREATING GLOBAL STYLES USING CSS ###
@@ -58,9 +59,16 @@ def global_ping_page():
         globalping_page()
     )
     
+# def traceroute_page():
+#     return rx.fragment(
+#         navbar(),
+#         traceroute_page()
+#     )
+    
 
 ### CREATING THE APP ###
 
 app = rx.App(theme=rx.theme(accent_color="grass"), style=style)
 app.add_page(ip_page, route="/")
 app.add_page(global_ping_page, route="/globalping")
+#app.add_page(traceroute_page, route="/tracepacket")

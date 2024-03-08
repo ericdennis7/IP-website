@@ -4,10 +4,11 @@
 import { Fragment, useCallback, useContext } from "react"
 import { EventLoopContext, StateContexts } from "/utils/context"
 import { Event, getBackendURL, isTrue } from "/utils/state"
+import { FrownIcon as LucideFrownIcon, LaughIcon as LucideLaughIcon, MehIcon as LucideMehIcon, PlayIcon as LucidePlayIcon, SmileIcon as LucideSmileIcon, WifiOffIcon as LucideWifiOffIcon } from "lucide-react"
+import { keyframes } from "@emotion/react"
 import { Button as RadixThemesButton, Container as RadixThemesContainer, Dialog as RadixThemesDialog, DropdownMenu as RadixThemesDropdownMenu, Flex as RadixThemesFlex, Heading as RadixThemesHeading, Link as RadixThemesLink, Text as RadixThemesText } from "@radix-ui/themes"
 import env from "/env.json"
 import NextLink from "next/link"
-import { FrownIcon as LucideFrownIcon, LaughIcon as LucideLaughIcon, MehIcon as LucideMehIcon, PlayIcon as LucidePlayIcon, SmileIcon as LucideSmileIcon } from "lucide-react"
 import { SkeletonText, Stack } from "@chakra-ui/react"
 import { Grid as DataTableGrid } from "gridjs-react"
 import "gridjs/dist/theme/mermaid.css"
@@ -15,40 +16,57 @@ import NextHead from "next/head"
 
 
 
-export function Button_48412b45faf25c1425d475a08ca21e9a () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
+const pulse = keyframes`
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+`
 
-  const on_click_347c0269d48fabdaf2e9480e861a7972 = useCallback((_e) => addEvents([Event("state.form_input_state.handle_submit", {})], (_e), {}), [addEvents, Event])
 
-  return (
-    <RadixThemesButton onClick={on_click_347c0269d48fabdaf2e9480e861a7972} size={`3`}>
-  <LucidePlayIcon css={{"color": "var(--current-color)"}}/>
-  {`Run Globalping Test!`}
-</RadixThemesButton>
-  )
-}
-
-export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
+export function Fragment_ac0b06893fc1b15016f3e0532508036d () {
+  const [addEvents, connectErrors] = useContext(EventLoopContext);
 
 
   return (
     <Fragment>
-  {isTrue(connectError !== null) ? (
+  {isTrue(connectErrors.length >= 2) ? (
   <Fragment>
-  <RadixThemesDialog.Root open={connectError !== null}>
+  <RadixThemesDialog.Root css={{"zIndex": 9999}} open={connectErrors.length >= 2}>
   <RadixThemesDialog.Content>
   <RadixThemesDialog.Title>
   {`Connection Error`}
 </RadixThemesDialog.Title>
   <RadixThemesText as={`p`}>
   {`Cannot connect to server: `}
-  {(connectError !== null) ? connectError.message : ''}
+  {(connectErrors.length > 0) ? connectErrors[connectErrors.length - 1].message : ''}
   {`. Check if server is reachable at `}
   {getBackendURL(env.EVENT).href}
 </RadixThemesText>
 </RadixThemesDialog.Content>
 </RadixThemesDialog.Root>
+</Fragment>
+) : (
+  <Fragment/>
+)}
+</Fragment>
+  )
+}
+
+export function Fragment_e9a05c105aa9215aeba52aeec8fe2e76 () {
+  const state = useContext(StateContexts.state)
+  const [addEvents, connectErrors] = useContext(EventLoopContext);
+
+
+  return (
+    <Fragment>
+  {isTrue(((!state.is_hydrated) || (connectErrors.length > 0))) ? (
+  <Fragment>
+  <LucideWifiOffIcon css={{"color": "crimson", "zIndex": 9999, "position": "fixed", "bottom": "30px", "right": "30px", "animation": `${pulse} 1s infinite`}} size={32}>
+  {`wifi_off`}
+</LucideWifiOffIcon>
 </Fragment>
 ) : (
   <Fragment/>
@@ -88,6 +106,19 @@ export function Fragment_c09a057d3472d07e60865af30bcab077 () {
   )
 }
 
+export function Button_48412b45faf25c1425d475a08ca21e9a () {
+  const [addEvents, connectErrors] = useContext(EventLoopContext);
+
+  const on_click_347c0269d48fabdaf2e9480e861a7972 = useCallback((_e) => addEvents([Event("state.form_input_state.handle_submit", {})], (_e), {}), [addEvents, Event])
+
+  return (
+    <RadixThemesButton onClick={on_click_347c0269d48fabdaf2e9480e861a7972} size={`3`}>
+  <LucidePlayIcon css={{"color": "var(--current-color)"}}/>
+  {`Run Globalping Test!`}
+</RadixThemesButton>
+  )
+}
+
 export function Fragment_e1d8101aef680242d1bb09a07fe00379 () {
   const state__form_input_state = useContext(StateContexts.state__form_input_state)
 
@@ -113,17 +144,22 @@ export default function Component() {
 
   return (
     <Fragment>
-  <Fragment_1762bb90abdb81b879b2a22edbbe01a1/>
   <Fragment>
-  <RadixThemesFlex align={`center`} css={{"position": "fixed", "top": "0px", "backgroundColor": "white", "padding": "1em", "height": "4em", "width": "100%", "zIndex": "5", "borderBottom": "0.1px solid #eae7ec", "flexDirection": "row"}} gap={`2`}>
-  <RadixThemesFlex align={`start`} css={{"flexDirection": "row"}} gap={`2`}>
+  <div css={{"position": "fixed", "width": "100vw", "height": "0"}}>
+  <Fragment_e9a05c105aa9215aeba52aeec8fe2e76/>
+</div>
+  <Fragment_ac0b06893fc1b15016f3e0532508036d/>
+</Fragment>
+  <Fragment>
+  <RadixThemesFlex align={`center`} css={{"position": "fixed", "top": "0px", "backgroundColor": "white", "padding": "1em", "height": "4em", "width": "100%", "zIndex": "5", "borderBottom": "0.1px solid #eae7ec"}} direction={`row`} gap={`2`}>
+  <RadixThemesFlex align={`start`} direction={`row`} gap={`2`}>
   <img css={{"width": "2em"}} src={`/favicon.ico`}/>
   <RadixThemesHeading css={{"fontSize": "2em"}}>
   {`App`}
 </RadixThemesHeading>
 </RadixThemesFlex>
   <RadixThemesFlex css={{"flex": 1, "justifySelf": "stretch", "alignSelf": "stretch"}}/>
-  <RadixThemesFlex align={`center`} css={{"flexDirection": "row"}} gap={`5`}>
+  <RadixThemesFlex align={`center`} direction={`row`} gap={`5`}>
   <RadixThemesDropdownMenu.Root>
   <RadixThemesDropdownMenu.Trigger>
   <RadixThemesButton css={{"backgroundColor": "black", "color": "white"}} radius={`medium`} variant={`soft`}>
@@ -151,7 +187,7 @@ export default function Component() {
 </RadixThemesHeading>
 </RadixThemesContainer>
   <RadixThemesContainer css={{"backgroundColor": "#f4f5f8", "paddingLeft": "1em", "paddingRight": "1em"}}>
-  <RadixThemesFlex align={`start`} css={{"backgroundColor": "#f4f5f8", "flexDirection": "row"}} gap={`2`}>
+  <RadixThemesFlex align={`start`} css={{"backgroundColor": "#f4f5f8"}} direction={`row`} gap={`2`}>
   <RadixThemesLink asChild={true} css={{"color": "rgba(34,46,58,.5)", "backgroundColor": "hsla(0,0%,100%,.5)", "padding": "15px", "borderRadius": "7px 7px 0px 0px"}}>
   <NextLink href={`/`} passHref={true}>
   {`My IP Address`}
@@ -163,7 +199,7 @@ export default function Component() {
 </NextLink>
 </RadixThemesLink>
   <RadixThemesLink asChild={true} css={{"color": "rgba(34,46,58,.5)", "backgroundColor": "hsla(0,0%,100%,.5)", "padding": "15px", "borderRadius": "7px 7px 0px 0px"}}>
-  <NextLink href={`https://reflex.dev`} passHref={true}>
+  <NextLink href={`/tracepacket`} passHref={true}>
   {`Track My Packet`}
 </NextLink>
 </RadixThemesLink>
