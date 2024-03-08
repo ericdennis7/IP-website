@@ -194,16 +194,30 @@ def globalping_page():
                     rx.container()
                 ),
             ),
-                rx.container(height="40px"),
-            rx.heading("What is ping?"),
-            rx.container(height="20px"),
-            rx.text("""
-                Using the awesome features of jsDelivr Globalping, this cool web tool will randomly pick 100 spots across 
-                the globe and gather the ping times (in milliseconds) from your current IP address. To get started, just click "Run Globalping Test." 
-                It only takes around 10 seconds to gather and show your results. Feel free to run it again whenever you want!
-                """,
-                wrap="wrap", width="100%"),
-            rx.container(height="10px"),
+            rx.container(height="40px"),
+            rx.flex(
+                rx.container(
+                    rx.heading("What is ping?"),
+                    rx.container(height="20px"),
+                    rx.text("""Ping is a measure of the round-trip time it takes for a data packet to travel from the source to the destination and back again. The "good" or acceptable ping range can vary depending on the specific use case and requirements. Here are general categories for ping ranges:""", wrap="wrap", width="100%"),
+                    rx.container(height="10px"),
+                    rx.heading("Low Ping (0-30 ms):", size="3"),
+                    rx.text("""- Excellent for online gaming, especially for fast-paced and competitive games.Ideal for real-time applications, video conferencing, and voice-over-IP (VoIP).""", wrap="wrap", width="100%"),
+                    rx.container(height="10px"),
+                    rx.heading("Medium Ping (30-100 ms):", size="3"), 
+                    rx.text("""- Acceptable for most online activities, including gaming, video streaming, and general web browsing. Still suitable for many real-time applications, but slight delays may be noticed.""", wrap="wrap", width="100%"),    
+                    rx.container(height="10px"),
+                    rx.heading("High Ping (100-200 ms):", size="3"),
+                    rx.text("""- Noticeable delays may be experienced, especially in online gaming and real-time applications. Can still be acceptable for activities like web browsing and video streaming, but some lag may be apparent.""", wrap="wrap", width="100%"), 
+                    rx.container(height="10px"),   
+                    rx.heading("Very High Ping (200+ ms):", size="3"),   
+                    rx.text("""- Significant delays are likely, impacting online gaming and real-time applications. Web browsing and video streaming may be affected, with potential buffering and loading delays.""", wrap="wrap", width="100%"),
+                    rx.container(height="10px"),
+                    bg="#f4f5f8",
+                    border_radius="7px",
+                    padding="1em"  
+                ),
+            ),
             margin_top="3em",
             width="100%"
             ),
