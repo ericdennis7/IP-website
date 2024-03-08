@@ -7,12 +7,57 @@ import { Event, getBackendURL, isTrue } from "/utils/state"
 import { Button as RadixThemesButton, Container as RadixThemesContainer, Dialog as RadixThemesDialog, DropdownMenu as RadixThemesDropdownMenu, Flex as RadixThemesFlex, Heading as RadixThemesHeading, Link as RadixThemesLink, Text as RadixThemesText } from "@radix-ui/themes"
 import env from "/env.json"
 import NextLink from "next/link"
+import { PlayIcon as LucidePlayIcon } from "lucide-react"
 import { SkeletonText, Stack } from "@chakra-ui/react"
 import { Grid as DataTableGrid } from "gridjs-react"
 import "gridjs/dist/theme/mermaid.css"
 import NextHead from "next/head"
 
 
+
+export function Button_48412b45faf25c1425d475a08ca21e9a () {
+  const [addEvents, connectError] = useContext(EventLoopContext);
+
+  const on_click_347c0269d48fabdaf2e9480e861a7972 = useCallback((_e) => addEvents([Event("state.form_input_state.handle_submit", {})], (_e), {}), [addEvents, Event])
+
+  return (
+    <RadixThemesButton onClick={on_click_347c0269d48fabdaf2e9480e861a7972} size={`3`}>
+  <LucidePlayIcon css={{"color": "var(--current-color)"}}/>
+  {`Run Globalping Test!`}
+</RadixThemesButton>
+  )
+}
+
+export function Fragment_77cdda9599dccde839377e84be39972d () {
+  const state__form_input_state = useContext(StateContexts.state__form_input_state)
+
+
+  return (
+    <Fragment>
+  {isTrue(state__form_input_state.show_data) ? (
+  <Fragment>
+  <DataTableGrid columns={state__form_input_state.ping_results.columns} data={state__form_input_state.ping_results.data} pagination={true} resizable={true} search={true} sort={true}/>
+</Fragment>
+) : (
+  <Fragment>
+  {isTrue(state__form_input_state.show_initial) ? (
+  <Fragment>
+  <RadixThemesContainer css={{"backgroundColor": "#f4f5f8", "borderRadius": "7px", "marginTop": "20px"}}>
+  <RadixThemesText as={`p`} css={{"padding": "1em", "textAlign": "center"}}>
+  {`Your ping results will be displayed here!`}
+</RadixThemesText>
+</RadixThemesContainer>
+</Fragment>
+) : (
+  <Fragment>
+  <RadixThemesContainer/>
+</Fragment>
+)}
+</Fragment>
+)}
+</Fragment>
+  )
+}
 
 export function Fragment_e1d8101aef680242d1bb09a07fe00379 () {
   const state__form_input_state = useContext(StateContexts.state__form_input_state)
@@ -61,49 +106,6 @@ export function Fragment_1762bb90abdb81b879b2a22edbbe01a1 () {
   <Fragment/>
 )}
 </Fragment>
-  )
-}
-
-export function Fragment_7dcc98a07bb06ecb7f2659a550743607 () {
-  const state__form_input_state = useContext(StateContexts.state__form_input_state)
-
-
-  return (
-    <Fragment>
-  {isTrue(state__form_input_state.show_data) ? (
-  <Fragment>
-  <DataTableGrid columns={state__form_input_state.ping_results.columns} data={state__form_input_state.ping_results.data} search={true} sort={true}/>
-</Fragment>
-) : (
-  <Fragment>
-  {isTrue(state__form_input_state.show_initial) ? (
-  <Fragment>
-  <RadixThemesContainer css={{"backgroundColor": "#f4f5f8", "borderRadius": "7px", "marginTop": "20px"}}>
-  <RadixThemesText as={`p`} css={{"padding": "1em", "textAlign": "center"}}>
-  {`Your ping results will be displayed here!`}
-</RadixThemesText>
-</RadixThemesContainer>
-</Fragment>
-) : (
-  <Fragment>
-  <RadixThemesContainer/>
-</Fragment>
-)}
-</Fragment>
-)}
-</Fragment>
-  )
-}
-
-export function Button_e1860d1c801ee3ad17ecffb1c05d2aa4 () {
-  const [addEvents, connectError] = useContext(EventLoopContext);
-
-  const on_click_347c0269d48fabdaf2e9480e861a7972 = useCallback((_e) => addEvents([Event("state.form_input_state.handle_submit", {})], (_e), {}), [addEvents, Event])
-
-  return (
-    <RadixThemesButton onClick={on_click_347c0269d48fabdaf2e9480e861a7972} size={`3`}>
-  {`Run Globalping Test!`}
-</RadixThemesButton>
   )
 }
 
@@ -181,11 +183,28 @@ export default function Component() {
                     It only takes around 10 seconds to gather and show your results. Feel free to run it again whenever you want!
                     `}
 </RadixThemesText>
+  <RadixThemesContainer css={{"height": "10px"}}/>
+  <RadixThemesText as={`p`} css={{"wrap": "wrap", "width": "100%"}}>
+  {`Every test contains 3 packets and the results are displayed in milliseconds (ms).`}
+</RadixThemesText>
   <RadixThemesContainer css={{"height": "20px"}}/>
-  <Button_e1860d1c801ee3ad17ecffb1c05d2aa4/>
+  <Button_48412b45faf25c1425d475a08ca21e9a/>
   <RadixThemesContainer css={{"height": "20px"}}/>
   <Fragment_e1d8101aef680242d1bb09a07fe00379/>
-  <Fragment_7dcc98a07bb06ecb7f2659a550743607/>
+  <Fragment_77cdda9599dccde839377e84be39972d/>
+  <RadixThemesContainer css={{"height": "40px"}}/>
+  <RadixThemesHeading>
+  {`What is ping?`}
+</RadixThemesHeading>
+  <RadixThemesContainer css={{"height": "20px"}}/>
+  <RadixThemesText as={`p`} css={{"wrap": "wrap", "width": "100%"}}>
+  {`
+                Using the awesome features of jsDelivr Globalping, this cool web tool will randomly pick 100 spots across 
+                the globe and gather the ping times (in milliseconds) from your current IP address. To get started, just click "Run Globalping Test." 
+                It only takes around 10 seconds to gather and show your results. Feel free to run it again whenever you want!
+                `}
+</RadixThemesText>
+  <RadixThemesContainer css={{"height": "10px"}}/>
 </RadixThemesContainer>
 </RadixThemesFlex>
 </Fragment>

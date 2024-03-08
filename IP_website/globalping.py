@@ -75,9 +75,9 @@ def globalping():
         'Country': countries_full,
         'Region': regions,
         'Continent': continents,
-        'Avg in ms': avg_values,
-        'Min in ms': min_values,
-        'Max in ms': max_values,
+        'Avg': avg_values,
+        'Min': min_values,
+        'Max': max_values,
     })
 
     return df
@@ -159,8 +159,10 @@ def globalping_page():
                     It only takes around 10 seconds to gather and show your results. Feel free to run it again whenever you want!
                     """,
                     wrap="wrap", width="100%"),
+                rx.container(height="10px"),
+                rx.text("Every test contains 3 packets and the results are displayed in milliseconds (ms).", wrap="wrap", width="100%"),
                 rx.container(height="20px"),
-                rx.button("Run Globalping Test!", on_click=FormInputState.handle_submit, size="3"),
+                rx.button(rx.icon(tag="play"), "Run Globalping Test!", on_click=FormInputState.handle_submit, size="3"),
                 rx.container(height="20px"),
                 rx.cond(
                     FormInputState.loading,
@@ -178,6 +180,8 @@ def globalping_page():
                         data=FormInputState.ping_results,
                         search=True,
                         sort=True,
+                        resizable=True,
+                        pagination=True
                     ),
                 rx.cond(
                     FormInputState.show_initial,
@@ -190,6 +194,16 @@ def globalping_page():
                     rx.container()
                 ),
             ),
+                rx.container(height="40px"),
+            rx.heading("What is ping?"),
+            rx.container(height="20px"),
+            rx.text("""
+                Using the awesome features of jsDelivr Globalping, this cool web tool will randomly pick 100 spots across 
+                the globe and gather the ping times (in milliseconds) from your current IP address. To get started, just click "Run Globalping Test." 
+                It only takes around 10 seconds to gather and show your results. Feel free to run it again whenever you want!
+                """,
+                wrap="wrap", width="100%"),
+            rx.container(height="10px"),
             margin_top="3em",
             width="100%"
             ),
