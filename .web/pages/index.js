@@ -14,6 +14,16 @@ import NextHead from "next/head"
 
 
 
+const pulse = keyframes`
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+`
+
+
 export function Fragment_ac0b06893fc1b15016f3e0532508036d () {
   const [addEvents, connectErrors] = useContext(EventLoopContext);
 
@@ -62,16 +72,6 @@ export function Fragment_e9a05c105aa9215aeba52aeec8fe2e76 () {
 </Fragment>
   )
 }
-
-const pulse = keyframes`
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-`
-
 
 export default function Component() {
 
@@ -141,37 +141,37 @@ export default function Component() {
 </RadixThemesContainer>
   <RadixThemesFlex align={`center`} css={{"height": "50vh", "margin": "1em", "border": "none", "inset": "0", "display": "flex", "alignItems": "center", "justifyContent": "center"}}>
   <RadixThemesContainer css={{"border": "none", "inset": "0"}}>
-  <RadixThemesContainer css={{"color": "white", "textAlign": "center", "textWrap": "wrap", "borderRadius": "7px 7px 0px 0px", "border": "none", "backgroundColor": "#218c74", "inset": "0", "padding": ".7em"}}>
+  <RadixThemesContainer css={{"color": "white", "textAlign": "center", "textWrap": "wrap", "borderRadius": "7px 7px 0px 0px", "border": "none", "backgroundColor": "#e54666", "inset": "0", "padding": ".7em"}}>
   <RadixThemesStrong>
-  {`You are protected!`}
+  {`You are unprotected!`}
 </RadixThemesStrong>
 </RadixThemesContainer>
   <RadixThemesFlex align={`start`} css={{"width": "100%", "borderRadius": "7px", "boxShadow": "rgba(0, 0, 0, 0.35) 0px 5px 15px"}} direction={`row`} gap={`2`}>
   <RadixThemesFlex css={{"width": "100%"}} justify={`between`} wrap={`wrap`}>
-  <RadixThemesCard css={{"borderRadius": "0px 0px 0px 7px", "border": "2px solid #218c74", "width": "40%", "padding": "1.5em", "spacing": "4"}}>
+  <RadixThemesCard css={{"borderRadius": "0px 0px 0px 7px", "border": "2px solid #e54666", "width": "40%", "padding": "1.5em", "spacing": "4"}}>
   <RadixThemesFlex align={`center`} direction={`column`} gap={`2`}>
   <RadixThemesCard css={{"align": "center", "margin": "auto", "padding": "0px"}}>
   <RadixThemesTooltip content={`Image by storyset on Freepik`}>
-  <img align={`center`} css={{"width": "200px"}} src={`./protection.jpg`}/>
+  <img align={`center`} css={{"width": "200px"}} src={`./hacker.jpg`}/>
 </RadixThemesTooltip>
 </RadixThemesCard>
   <RadixThemesContainer css={{"height": "5px"}}/>
-  <RadixThemesText as={`p`} css={{"textAlign": "center", "color": "#218c74"}} size={`6`} weight={`bold`}>
-  {`Identity is Hidden`}
+  <RadixThemesText as={`p`} css={{"textAlign": "center", "color": "#e54666"}} size={`6`} weight={`bold`}>
+  {`Identity is Visible`}
 </RadixThemesText>
   <RadixThemesContainer css={{"height": "5px"}}/>
-  <RadixThemesButton css={{"backgroundColor": "#218c74"}}>
-  {`Perform a Global Ping Test`}
+  <RadixThemesButton css={{"backgroundColor": "#e54666"}}>
+  {`Hide Your Identity`}
 </RadixThemesButton>
 </RadixThemesFlex>
 </RadixThemesCard>
-  <RadixThemesCard css={{"borderRadius": "0px 0px 7px 0px", "border": "2px solid #218c74", "borderLeft": "none", "width": "60%", "padding": "1.5em", "spacing": "2"}}>
+  <RadixThemesCard css={{"borderRadius": "0px 0px 7px 0px", "border": "2px solid #e54666", "borderLeft": "none", "width": "60%", "padding": "1.5em", "spacing": "2"}}>
   <RadixThemesFlex align={`start`} direction={`column`} gap={`2`}>
   <RadixThemesText as={`p`} size={`3`} weight={`light`}>
   {`IP Address:`}
 </RadixThemesText>
   <RadixThemesText as={`p`} size={`5`} weight={`bold`}>
-  {`89.187.185.165`}
+  {`138.199.35.118`}
 </RadixThemesText>
   <RadixThemesContainer css={{"height": "5px"}}/>
   <RadixThemesText as={`p`} size={`3`} weight={`light`}>
@@ -192,7 +192,7 @@ export default function Component() {
   {`Internet Service Provider (org):`}
 </RadixThemesText>
   <RadixThemesText as={`p`} size={`5`} weight={`bold`}>
-  {`Datacamp Limited (Cdn77 LAX)`}
+  {`Datacamp Limited (Cdnext LAX)`}
 </RadixThemesText>
   <RadixThemesContainer css={{"height": "5px"}}/>
 </RadixThemesFlex>
@@ -312,26 +312,26 @@ export default function Component() {
 </RadixThemesContainer>
   <RadixThemesFlex css={{"display": "flex", "alignItems": "center", "justifyContent": "center"}}>
   <RadixThemesContainer>
-  <RadixThemesContainer css={{"color": "white", "textAlign": "center", "textWrap": "wrap", "borderRadius": "7px 7px 0px 0px", "border": "none", "backgroundColor": "#218c74", "inset": "0", "padding": ".7em", "margin": "4em 1em 0px 1em"}}>
+  <RadixThemesContainer css={{"color": "white", "textAlign": "center", "textWrap": "wrap", "borderRadius": "7px 7px 0px 0px", "border": "none", "backgroundColor": "#e54666", "inset": "0", "padding": ".7em", "margin": "4em 1em 0px 1em"}}>
   <RadixThemesStrong>
-  {`You are protected!`}
+  {`You are unprotected!`}
 </RadixThemesStrong>
 </RadixThemesContainer>
   <RadixThemesFlex>
-  <RadixThemesCard css={{"borderRadius": "0px 0px 7px 7px", "border": "2px solid #218c74", "width": "100%", "padding": "1.5em", "spacing": "4", "margin": "0px 1em 0px 1em"}}>
+  <RadixThemesCard css={{"borderRadius": "0px 0px 7px 7px", "border": "2px solid #e54666", "width": "100%", "padding": "1.5em", "spacing": "4", "margin": "0px 1em 0px 1em"}}>
   <RadixThemesFlex align={`center`} direction={`column`} gap={`2`}>
   <RadixThemesCard css={{"align": "center", "margin": "auto", "padding": "0px", "textAlign": "center"}}>
   <RadixThemesTooltip content={`Image by storyset on Freepik`}>
-  <img align={`center`} css={{"width": "200px", "margin": "auto"}} src={`./protection.jpg`}/>
+  <img align={`center`} css={{"width": "200px", "margin": "auto"}} src={`./hacker.jpg`}/>
 </RadixThemesTooltip>
 </RadixThemesCard>
   <RadixThemesContainer css={{"height": "5px"}}/>
-  <RadixThemesText as={`p`} css={{"textAlign": "center", "color": "#218c74"}} size={`6`} weight={`bold`}>
-  {`Identity is Hidden`}
+  <RadixThemesText as={`p`} css={{"textAlign": "center", "color": "#e54666"}} size={`6`} weight={`bold`}>
+  {`Identity is Visible`}
 </RadixThemesText>
   <RadixThemesContainer css={{"height": "5px"}}/>
-  <RadixThemesButton css={{"backgroundColor": "#218c74"}}>
-  {`Perform a Global Ping Test`}
+  <RadixThemesButton css={{"backgroundColor": "#e54666"}}>
+  {`Hide Your Identity`}
 </RadixThemesButton>
   <RadixThemesContainer css={{"height": "5px"}}/>
   <RadixThemesSeparator size={`4`}/>
@@ -340,7 +340,7 @@ export default function Component() {
   {`IP Address:`}
 </RadixThemesText>
   <RadixThemesText as={`p`} size={`5`} weight={`bold`}>
-  {`89.187.185.165`}
+  {`138.199.35.118`}
 </RadixThemesText>
   <RadixThemesContainer css={{"height": "5px"}}/>
   <RadixThemesText as={`p`} size={`3`} weight={`light`}>
@@ -361,7 +361,7 @@ export default function Component() {
   {`Internet Service Provider (org):`}
 </RadixThemesText>
   <RadixThemesText as={`p`} size={`5`} weight={`bold`}>
-  {`Datacamp Limited (Cdn77 LAX)`}
+  {`Datacamp Limited (Cdnext LAX)`}
 </RadixThemesText>
   <RadixThemesContainer css={{"height": "5px"}}/>
 </RadixThemesFlex>

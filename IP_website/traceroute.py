@@ -14,7 +14,7 @@ import plotly.express as px
 
 ### TRACEROUTE PAGE
 
-def traceroute_page_code():
+def traceroute_page():
     return rx.fragment(
     # MAIN CONTAINER
         rx.container(

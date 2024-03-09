@@ -59,11 +59,13 @@ def global_ping_page():
         globalping_page()
     )
     
-# def traceroute_page():
-#     return rx.fragment(
-#         navbar(),
-#         traceroute_page()
-#     )
+### THE TRACEROUTE PAGE ###
+    
+def trace_route_page():
+    return rx.fragment(
+        navbar(),
+        traceroute_page()
+    )
     
 
 ### CREATING THE APP ###
@@ -71,4 +73,4 @@ def global_ping_page():
 app = rx.App(theme=rx.theme(accent_color="grass"), style=style)
 app.add_page(ip_page, route="/")
 app.add_page(global_ping_page, route="/globalping")
-#app.add_page(traceroute_page, route="/tracepacket")
+app.add_page(trace_route_page, route="/tracepacket")
