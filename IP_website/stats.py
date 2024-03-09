@@ -96,30 +96,47 @@ def globalping():
         
 ### CLASSES ###
         
-class FormInputState1(rx.State):
-    ping_results: pd.DataFrame = pd.DataFrame()
-    loading: bool = False
-    show_data: bool = False
-    show_initial: bool = True
+class FormInput(rx.State):
+    form_data: dict = {}
+    results: str = ""
+    cities: list = []
+    numbers: list = ["1", "2", "3"]
 
-    @rx.background
-    async def handle_submit(self):
-        async with self:
-            self.loading = True
-            self.show_initial = False
+    def handle_submit(self, form_data: dict):
+        self.form_data = form_data
+        
+        url = "https://api.globalping.io/v1/measurements"
 
-        # Fetch ping results in a non-blocking way
-        results = await asyncio.to_thread(globalping)
+        data = {
+            "type": "ping",
+            "target": f"{self.form_data.get('ip_domain')}",
+            "locations": [
+                {
+                "magic": f"{self.form_data.get('location')}",
+                "limit": f"{self.form_data.get('test_count')}"
+                }
+            ]
+        }
 
-        async with self:
-            self.ping_results = results
-            self.show_data = True
-            self.loading = False
+        headers = {"Content-Type": "application/json"}
+
+        try:
+            response = requests.post(url, json=data, headers=headers)
+            response.raise_for_status()
+            measurement_id = response.json().get('id')
+            time.sleep(5)
+            result_response = requests.get(f"https://api.globalping.io/v1/measurements/{measurement_id}")
+            result_data = json.loads(result_response.text)
+            self.results = result_response.text
+
+        except requests.exceptions.RequestException as e:
+            print("Error:", e)
+            return None
         
     
 ### MAIN PAGE FUNCTION ###
 
-def traceroute_page():
+def stats_page():
     
     myip_info = myip.info()
 
@@ -161,6 +178,6 @@ def traceroute_page():
             padding_right="1em"
         ),
         rx.center(
-
+            rx.code_block(FormInput.results, language="json", wrap_long_lines=True),
     ),
 )

@@ -16,6 +16,99 @@ import NextHead from "next/head"
 
 
 
+export function Fragment_ac0b06893fc1b15016f3e0532508036d () {
+  const [addEvents, connectErrors] = useContext(EventLoopContext);
+
+
+  return (
+    <Fragment>
+  {isTrue(connectErrors.length >= 2) ? (
+  <Fragment>
+  <RadixThemesDialog.Root css={{"zIndex": 9999}} open={connectErrors.length >= 2}>
+  <RadixThemesDialog.Content>
+  <RadixThemesDialog.Title>
+  {`Connection Error`}
+</RadixThemesDialog.Title>
+  <RadixThemesText as={`p`}>
+  {`Cannot connect to server: `}
+  {(connectErrors.length > 0) ? connectErrors[connectErrors.length - 1].message : ''}
+  {`. Check if server is reachable at `}
+  {getBackendURL(env.EVENT).href}
+</RadixThemesText>
+</RadixThemesDialog.Content>
+</RadixThemesDialog.Root>
+</Fragment>
+) : (
+  <Fragment/>
+)}
+</Fragment>
+  )
+}
+
+export function Fragment_e9a05c105aa9215aeba52aeec8fe2e76 () {
+  const state = useContext(StateContexts.state)
+  const [addEvents, connectErrors] = useContext(EventLoopContext);
+
+
+  return (
+    <Fragment>
+  {isTrue(((!state.is_hydrated) || (connectErrors.length > 0))) ? (
+  <Fragment>
+  <LucideWifiOffIcon css={{"color": "crimson", "zIndex": 9999, "position": "fixed", "bottom": "30px", "right": "30px", "animation": `${pulse} 1s infinite`}} size={32}>
+  {`wifi_off`}
+</LucideWifiOffIcon>
+</Fragment>
+) : (
+  <Fragment/>
+)}
+</Fragment>
+  )
+}
+
+export function Button_48412b45faf25c1425d475a08ca21e9a () {
+  const [addEvents, connectErrors] = useContext(EventLoopContext);
+
+  const on_click_347c0269d48fabdaf2e9480e861a7972 = useCallback((_e) => addEvents([Event("state.form_input_state.handle_submit", {})], (_e), {}), [addEvents, Event])
+
+  return (
+    <RadixThemesButton onClick={on_click_347c0269d48fabdaf2e9480e861a7972} size={`3`}>
+  <LucidePlayIcon css={{"color": "var(--current-color)"}}/>
+  {`Run Globalping Test!`}
+</RadixThemesButton>
+  )
+}
+
+const pulse = keyframes`
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+`
+
+
+export function Fragment_e1d8101aef680242d1bb09a07fe00379 () {
+  const state__form_input_state = useContext(StateContexts.state__form_input_state)
+
+
+  return (
+    <Fragment>
+  {isTrue(state__form_input_state.loading) ? (
+  <Fragment>
+  <Stack sx={{"width": "100%"}}>
+  <SkeletonText noOfLines={25}/>
+</Stack>
+</Fragment>
+) : (
+  <Fragment>
+  <RadixThemesContainer css={{"height": "0px"}}/>
+</Fragment>
+)}
+</Fragment>
+  )
+}
+
 export function Fragment_c09a057d3472d07e60865af30bcab077 () {
   const state__form_input_state = useContext(StateContexts.state__form_input_state)
 
@@ -47,106 +140,13 @@ export function Fragment_c09a057d3472d07e60865af30bcab077 () {
   )
 }
 
-export function Fragment_e1d8101aef680242d1bb09a07fe00379 () {
-  const state__form_input_state = useContext(StateContexts.state__form_input_state)
-
-
-  return (
-    <Fragment>
-  {isTrue(state__form_input_state.loading) ? (
-  <Fragment>
-  <Stack sx={{"width": "100%"}}>
-  <SkeletonText noOfLines={25}/>
-</Stack>
-</Fragment>
-) : (
-  <Fragment>
-  <RadixThemesContainer css={{"height": "0px"}}/>
-</Fragment>
-)}
-</Fragment>
-  )
-}
-
-export function Button_48412b45faf25c1425d475a08ca21e9a () {
-  const [addEvents, connectErrors] = useContext(EventLoopContext);
-
-  const on_click_347c0269d48fabdaf2e9480e861a7972 = useCallback((_e) => addEvents([Event("state.form_input_state.handle_submit", {})], (_e), {}), [addEvents, Event])
-
-  return (
-    <RadixThemesButton onClick={on_click_347c0269d48fabdaf2e9480e861a7972} size={`3`}>
-  <LucidePlayIcon css={{"color": "var(--current-color)"}}/>
-  {`Run Globalping Test!`}
-</RadixThemesButton>
-  )
-}
-
-export function Fragment_966c0378eb9d65bdfb5286644be9b831 () {
-  const [addEvents, connectErrors] = useContext(EventLoopContext);
-  const state = useContext(StateContexts.state)
-
-
-  return (
-    <Fragment>
-  {isTrue(((!state.is_hydrated) || (connectErrors.length > 0))) ? (
-  <Fragment>
-  <LucideWifiOffIcon css={{"color": "crimson", "zIndex": 9999, "position": "fixed", "bottom": "30px", "right": "30px", "animation": `${pulse} 1s infinite`}} size={32}>
-  {`wifi_off`}
-</LucideWifiOffIcon>
-</Fragment>
-) : (
-  <Fragment/>
-)}
-</Fragment>
-  )
-}
-
-const pulse = keyframes`
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-`
-
-
-export function Fragment_ac0b06893fc1b15016f3e0532508036d () {
-  const [addEvents, connectErrors] = useContext(EventLoopContext);
-
-
-  return (
-    <Fragment>
-  {isTrue(connectErrors.length >= 2) ? (
-  <Fragment>
-  <RadixThemesDialog.Root css={{"zIndex": 9999}} open={connectErrors.length >= 2}>
-  <RadixThemesDialog.Content>
-  <RadixThemesDialog.Title>
-  {`Connection Error`}
-</RadixThemesDialog.Title>
-  <RadixThemesText as={`p`}>
-  {`Cannot connect to server: `}
-  {(connectErrors.length > 0) ? connectErrors[connectErrors.length - 1].message : ''}
-  {`. Check if server is reachable at `}
-  {getBackendURL(env.EVENT).href}
-</RadixThemesText>
-</RadixThemesDialog.Content>
-</RadixThemesDialog.Root>
-</Fragment>
-) : (
-  <Fragment/>
-)}
-</Fragment>
-  )
-}
-
 export default function Component() {
 
   return (
     <Fragment>
   <Fragment>
   <div css={{"position": "fixed", "width": "100vw", "height": "0"}}>
-  <Fragment_966c0378eb9d65bdfb5286644be9b831/>
+  <Fragment_e9a05c105aa9215aeba52aeec8fe2e76/>
 </div>
   <Fragment_ac0b06893fc1b15016f3e0532508036d/>
 </Fragment>
