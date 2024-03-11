@@ -6,10 +6,10 @@ import { EventLoopContext, StateContexts } from "/utils/context"
 import { Event, getBackendURL, isTrue } from "/utils/state"
 import { WifiOffIcon as LucideWifiOffIcon } from "lucide-react"
 import { keyframes } from "@emotion/react"
-import { Button as RadixThemesButton, Card as RadixThemesCard, Container as RadixThemesContainer, Dialog as RadixThemesDialog, DropdownMenu as RadixThemesDropdownMenu, Flex as RadixThemesFlex, Heading as RadixThemesHeading, Link as RadixThemesLink, Separator as RadixThemesSeparator, Strong as RadixThemesStrong, Text as RadixThemesText, Tooltip as RadixThemesTooltip } from "@radix-ui/themes"
+import { Button as RadixThemesButton, Card as RadixThemesCard, Container as RadixThemesContainer, Dialog as RadixThemesDialog, Flex as RadixThemesFlex, Heading as RadixThemesHeading, Link as RadixThemesLink, Separator as RadixThemesSeparator, Strong as RadixThemesStrong, Text as RadixThemesText, Tooltip as RadixThemesTooltip } from "@radix-ui/themes"
 import env from "/env.json"
-import { Box } from "@chakra-ui/react"
 import NextLink from "next/link"
+import { Box } from "@chakra-ui/react"
 import NextHead from "next/head"
 
 
@@ -33,16 +33,6 @@ export function Fragment_966c0378eb9d65bdfb5286644be9b831 () {
 </Fragment>
   )
 }
-
-const pulse = keyframes`
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-`
-
 
 export function Fragment_ac0b06893fc1b15016f3e0532508036d () {
   const [addEvents, connectErrors] = useContext(EventLoopContext);
@@ -73,6 +63,16 @@ export function Fragment_ac0b06893fc1b15016f3e0532508036d () {
   )
 }
 
+const pulse = keyframes`
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+`
+
+
 export default function Component() {
 
   return (
@@ -86,55 +86,41 @@ export default function Component() {
   <Fragment>
   <RadixThemesFlex align={`center`} css={{"position": "fixed", "top": "0px", "backgroundColor": "white", "padding": "1em", "height": "4em", "width": "100%", "zIndex": "5", "borderBottom": "0.1px solid #eae7ec"}} direction={`row`} gap={`2`}>
   <RadixThemesFlex align={`start`} direction={`row`} gap={`2`}>
-  <img css={{"width": "2em"}} src={`/favicon.ico`}/>
   <RadixThemesHeading css={{"fontSize": "2em"}}>
-  {`App`}
+  {`🌎 MyGlobalPing`}
 </RadixThemesHeading>
 </RadixThemesFlex>
   <RadixThemesFlex css={{"flex": 1, "justifySelf": "stretch", "alignSelf": "stretch"}}/>
   <RadixThemesFlex align={`center`} direction={`row`} gap={`5`}>
-  <RadixThemesDropdownMenu.Root>
-  <RadixThemesDropdownMenu.Trigger>
-  <RadixThemesButton css={{"backgroundColor": "black", "color": "white"}} radius={`medium`} variant={`soft`}>
-  {`Menu`}
-</RadixThemesButton>
-</RadixThemesDropdownMenu.Trigger>
-  <RadixThemesDropdownMenu.Content>
-  <RadixThemesDropdownMenu.Item>
-  {`item 1`}
-</RadixThemesDropdownMenu.Item>
-  <RadixThemesDropdownMenu.Item>
-  {`Item 2`}
-</RadixThemesDropdownMenu.Item>
-  <RadixThemesDropdownMenu.Item>
-  {`Item 3`}
-</RadixThemesDropdownMenu.Item>
-</RadixThemesDropdownMenu.Content>
-</RadixThemesDropdownMenu.Root>
+  <RadixThemesLink asChild={true} color={`blue`} css={{"variant": "soft", "radius": "medium"}}>
+  <NextLink href={`https://www.linkedin.com/in/ericdennis7/`} passHref={true}>
+  {`LinkedIn`}
+</NextLink>
+</RadixThemesLink>
 </RadixThemesFlex>
 </RadixThemesFlex>
   <Fragment>
   <Box sx={{"display": ["none", "none", "none", "block"]}}>
   <RadixThemesContainer css={{"backgroundColor": "#f4f5f8", "padding": "50px 1em 100px 1em"}}>
   <RadixThemesHeading align={`left`} css={{"marginTop": "10vh"}} size={`9`}>
-  {`What's my IP address?`}
+  {`What's my IP address? 📫`}
 </RadixThemesHeading>
 </RadixThemesContainer>
   <RadixThemesContainer css={{"backgroundColor": "#f4f5f8"}}>
   <RadixThemesFlex align={`start`} css={{"backgroundColor": "#f4f5f8"}} direction={`row`} gap={`2`}>
   <RadixThemesLink asChild={true} css={{"color": "black", "backgroundColor": "white", "padding": "15px", "borderRadius": "7px 7px 0px 0px"}}>
   <NextLink href={`/`} passHref={true}>
-  {`My IP Address`}
+  {`IP Address`}
 </NextLink>
 </RadixThemesLink>
   <RadixThemesLink asChild={true} css={{"color": "rgba(34,46,58,.5)", "backgroundColor": "hsla(0,0%,100%,.5)", "padding": "15px", "borderRadius": "7px 7px 0px 0px"}}>
   <NextLink href={`/globalping`} passHref={true}>
-  {`My Global Ping`}
+  {`Global Ping`}
 </NextLink>
 </RadixThemesLink>
   <RadixThemesLink asChild={true} css={{"color": "rgba(34,46,58,.5)", "backgroundColor": "hsla(0,0%,100%,.5)", "padding": "15px", "borderRadius": "7px 7px 0px 0px"}}>
   <NextLink href={`/internetstats`} passHref={true}>
-  {`Track My Packet`}
+  {`Internet Stats`}
 </NextLink>
 </RadixThemesLink>
 </RadixThemesFlex>

@@ -56,26 +56,26 @@ def stats_page():
         # MAIN CONTAINER
         #rx.desktop_only(
         rx.container(
-            rx.heading("Get your ping from anywhere! 🌎", size="9", margin_top="10vh", align="left"),
+            rx.heading("Internet Statistics (2024) 📈", size="9", margin_top="10vh", align="left"),
             background_color="#f4f5f8",
             padding="50px 1em 100px 1em"
         ),
         # MINI NAVBAR
         rx.container(
             rx.hstack(
-                rx.link("My IP Address", 
+                rx.link("IP Address", 
                         href="/",
                         color="rgba(34,46,58,.5)",
                         background_color="hsla(0,0%,100%,.5)",
                         padding="15px", 
                         border_radius='7px 7px 0px 0px'),
-                rx.link("My Global Ping", 
+                rx.link("Global Ping", 
                         href="/globalping",
                         color="rgba(34,46,58,.5)",
                         background_color="hsla(0,0%,100%,.5)", 
                         padding="15px", 
                         border_radius='7px 7px 0px 0px'),
-                rx.link("Track My Packet", 
+                rx.link("Internet Stats", 
                         href="/internetstats",
                         color="black",
                         background_color="white", 
