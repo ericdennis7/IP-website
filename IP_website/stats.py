@@ -15,126 +15,26 @@ import pandas as pd
 import reflex as rx
 import myipaddress as myip
 import plotly.express as px
-
-
-def globalping():
-        
-    url = "https://api.globalping.io/v1/measurements"
-    
-    data = {
-        "type": "ping",
-        "target": f"{myip.public_ip()}",
-        "locations": [
-            {
-            "magic": "world",
-            "limit": 100
-            }
-        ]
-    }
-    
-    headers = {"Content-Type": "application/json"}
-
-    response = requests.post(url, json=data, headers=headers)
-    measurement_id = response.json().get('id')
-    response.raise_for_status()
-    time.sleep(10)
-    result_response = requests.get(f"https://api.globalping.io/v1/measurements/{measurement_id}")
-    result_data = json.loads(result_response.text)
-
-    # Extracting required data into lists.
-    continents = []
-    regions = []
-    countries = []
-    countries_full = []
-    cities = []
-    min_values = []
-    max_values = []
-    avg_values = []
-    total = []
-    loss = []
-    rcv = []
-    drop = []
-
-    # Inserting results into their appropriate lists.
-    for result in result_data['results']:
-        continents.append(result['probe']['continent'])
-        regions.append(result['probe']['region'])
-        countries.append(result['probe']['country'])
-        cities.append(result['probe']['city'])
-        min_values.append(result['result']['stats']['min'])
-        max_values.append(result['result']['stats']['max'])
-        avg_values.append(result['result']['stats']['avg'])
-        total.append(result['result']['stats']['total'])
-        rcv.append(result['result']['stats']['rcv'])
-        loss.append(result['result']['stats']['loss'])
-        drop.append(result['result']['stats']['drop'])
-        
-    for code in countries:
-        try:
-            country = pycountry.countries.get(alpha_2=code.upper())
-            countries_full.append(country.name)
-        except AttributeError:
-            # If country is not found, append the original code
-            countries_full.append(code)
-
-    # Creating a pandas dataframe.
-    df = pd.DataFrame({
-        'City': cities,
-        'Country': countries_full,
-        'Region': regions,
-        'Continent': continents,
-        'Avg': avg_values,
-        'Min': min_values,
-        'Max': max_values,
-        'Tot': total,
-        'Rcv': rcv,
-        'Los': loss,
-        'Dpd': drop
-    })
-
-    return df
-        
-### CLASSES ###
-        
-class FormInput(rx.State):
-    form_data: dict = {}
-    results: str = ""
-    cities: list = []
-    numbers: list = ["1", "2", "3"]
-
-    def handle_submit(self, form_data: dict):
-        self.form_data = form_data
-        
-        url = "https://api.globalping.io/v1/measurements"
-
-        data = {
-            "type": "ping",
-            "target": f"{self.form_data.get('ip_domain')}",
-            "locations": [
-                {
-                "magic": f"{self.form_data.get('location')}",
-                "limit": f"{self.form_data.get('test_count')}"
-                }
-            ]
-        }
-
-        headers = {"Content-Type": "application/json"}
-
-        try:
-            response = requests.post(url, json=data, headers=headers)
-            response.raise_for_status()
-            measurement_id = response.json().get('id')
-            time.sleep(5)
-            result_response = requests.get(f"https://api.globalping.io/v1/measurements/{measurement_id}")
-            result_data = json.loads(result_response.text)
-            self.results = result_response.text
-
-        except requests.exceptions.RequestException as e:
-            print("Error:", e)
-            return None
-        
     
 ### MAIN PAGE FUNCTION ###
+
+os_data = [
+    {"value": 38.2, "name": "Win10", "fill": "#004fe1"},
+    {"value": 30.6, "name": "Win11", "fill": "#004fe1"},
+    {"value": 18.0, "name": "Mobile", "fill": "#81b662"},
+    {"value": 8.4, "name": "Mac", "fill": "#7e499d"},
+    {"value": 4.1, "name": "Linux", "fill": "#ffcc33"},
+    {"value": 1.3, "name": "Win7", "fill": "#004fe1"},
+    {"value": 0.5, "name": "Win8", "fill": "#004fe1"},
+]
+
+browser_data = [
+    {"value": 68.8, "name": "Chrome", "fill": "#004fe1"},
+    {"value": 14.9, "name": "Safari", "fill": "#004fe1"},
+    {"value": 4.2, "name": "Internet Explorer/Edge", "fill": "#81b662"},
+    {"value": 3.3, "name": "Firefox", "fill": "#7e499d"},
+    {"value": 1.3, "name": "Other", "fill": "#ffcc33"},
+]
 
 def stats_page():
     
@@ -166,7 +66,7 @@ def stats_page():
                         padding="15px", 
                         border_radius='7px 7px 0px 0px'),
                 rx.link("Track My Packet", 
-                        href="/tracepacket",
+                        href="/internetstats",
                         color="black",
                         background_color="white", 
                         padding="15px", 
@@ -177,7 +77,82 @@ def stats_page():
             padding_left="1em",
             padding_right="1em"
         ),
-        rx.center(
-            rx.code_block(FormInput.results, language="json", wrap_long_lines=True),
-    ),
-)
+        rx.container(height="50px"),
+        rx.container(
+            rx.hstack(
+                rx.vstack(
+                    rx.heading("What's an OS?", size="7"),
+                    rx.container(height="20px"),
+                    rx.text("""
+                        An operating system (OS) is a software that manages computer hardware and provides common services for computer programs. 
+                        It acts as an intermediary between computer hardware and the applications that run on it. The OS handles tasks 
+                        such as managing memory, controlling peripheral devices, facilitating communication between software applications, 
+                        and providing a user interface. Popular examples of operating systems include Microsoft Windows, macOS, Linux, and Android.
+                        """,
+                        wrap="wrap", width="100%"),
+                    ),
+                rx.container(height="7px"),
+                rx.container(
+                    rx.recharts.funnel_chart(
+                        rx.recharts.funnel(
+                            rx.recharts.label_list(
+                                position="right",
+                                data_key="name",
+                                fill="#000",
+                                stroke="none",
+                            ),
+                            rx.recharts.label_list(
+                                position="right",
+                                data_key="name",
+                                fill="#000",
+                                stroke="none",
+                            ),
+                            data_key="value",
+                            data=os_data,
+                        ),
+                        rx.recharts.graphing_tooltip(),
+                        width=350,
+                        height=250,
+                    ),
+                    align="center",
+                    margin="auto"
+                ),
+            ),
+            padding="1em"
+        ),
+        rx.container(height="50px"),
+        rx.container(
+            rx.hstack(
+                rx.recharts.pie_chart(
+                    rx.recharts.pie(
+                        data=browser_data,
+                        data_key="value",
+                        name_key="name",
+                        cx="50%",
+                        cy="50%",
+                        fill="#8884d8",
+                        label=True,
+                    )
+                ),
+                rx.vstack(
+                    rx.heading("What's a web browser?", size="7"),
+                    rx.container(height="20px"),
+                    rx.text("""                        
+                        A web browser is a software application that allows users to access and navigate the World Wide Web (WWW) to view web pages, 
+                        download files, and interact with web-based applications. Web browsers interpret and display content written in languages 
+                        such as HTML, CSS, and JavaScript, which are used to create websites. 
+                        """,
+                        wrap="wrap", width="100%"),
+                    rx.text(""" 
+                        Examples of popular web browsers include Google Chrome, Mozilla Firefox, Microsoft Edge, Safari, and Opera. Each browser 
+                        may have its unique features, but they all serve the primary purpose of allowing users to interact with and explore content 
+                        on the Internet.
+                        """,
+                        wrap="wrap", width="100%"),
+                    padding_left="20px"
+                    ),
+                rx.container(height="7px"),
+            ),
+            padding="1em"
+        ),
+    )

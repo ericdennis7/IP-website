@@ -61,7 +61,7 @@ def global_ping_page():
     
 ### THE TRACEROUTE PAGE ###
     
-def trace_route_page():
+def internet_stats_page():
     return rx.fragment(
         navbar(),
         stats_page()
@@ -73,4 +73,4 @@ def trace_route_page():
 app = rx.App(theme=rx.theme(accent_color="grass"), style=style)
 app.add_page(ip_page, route="/")
 app.add_page(global_ping_page, route="/globalping")
-app.add_page(stats_page, route="/internetstats")
+app.add_page(internet_stats_page, route="/internetstats")

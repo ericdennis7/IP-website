@@ -65,29 +65,6 @@ export function Fragment_e9a05c105aa9215aeba52aeec8fe2e76 () {
   )
 }
 
-export function Button_48412b45faf25c1425d475a08ca21e9a () {
-  const [addEvents, connectErrors] = useContext(EventLoopContext);
-
-  const on_click_347c0269d48fabdaf2e9480e861a7972 = useCallback((_e) => addEvents([Event("state.form_input_state.handle_submit", {})], (_e), {}), [addEvents, Event])
-
-  return (
-    <RadixThemesButton onClick={on_click_347c0269d48fabdaf2e9480e861a7972} size={`3`}>
-  <LucidePlayIcon css={{"color": "var(--current-color)"}}/>
-  {`Run Globalping Test!`}
-</RadixThemesButton>
-  )
-}
-
-const pulse = keyframes`
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-`
-
-
 export function Fragment_e1d8101aef680242d1bb09a07fe00379 () {
   const state__form_input_state = useContext(StateContexts.state__form_input_state)
 
@@ -106,6 +83,29 @@ export function Fragment_e1d8101aef680242d1bb09a07fe00379 () {
 </Fragment>
 )}
 </Fragment>
+  )
+}
+
+const pulse = keyframes`
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+`
+
+
+export function Button_48412b45faf25c1425d475a08ca21e9a () {
+  const [addEvents, connectErrors] = useContext(EventLoopContext);
+
+  const on_click_347c0269d48fabdaf2e9480e861a7972 = useCallback((_e) => addEvents([Event("state.form_input_state.handle_submit", {})], (_e), {}), [addEvents, Event])
+
+  return (
+    <RadixThemesButton onClick={on_click_347c0269d48fabdaf2e9480e861a7972} size={`3`}>
+  <LucidePlayIcon css={{"color": "var(--current-color)"}}/>
+  {`Run Globalping Test!`}
+</RadixThemesButton>
   )
 }
 
@@ -199,7 +199,7 @@ export default function Component() {
 </NextLink>
 </RadixThemesLink>
   <RadixThemesLink asChild={true} css={{"color": "rgba(34,46,58,.5)", "backgroundColor": "hsla(0,0%,100%,.5)", "padding": "15px", "borderRadius": "7px 7px 0px 0px"}}>
-  <NextLink href={`/tracepacket`} passHref={true}>
+  <NextLink href={`/internetstats`} passHref={true}>
   {`Track My Packet`}
 </NextLink>
 </RadixThemesLink>

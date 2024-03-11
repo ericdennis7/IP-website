@@ -149,7 +149,7 @@ def globalping_page():
                         padding="15px", 
                         border_radius='7px 7px 0px 0px'),
                 rx.link("Track My Packet", 
-                        href="/tracepacket",
+                        href="/internetstats",
                         color="rgba(34,46,58,.5)",
                         background_color="hsla(0,0%,100%,.5)", 
                         padding="15px", 
