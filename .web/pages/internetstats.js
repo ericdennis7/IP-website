@@ -13,9 +13,9 @@ import dynamic from "next/dynamic"
 import { Bar as RechartsBar, Funnel as RechartsFunnel, LabelList as RechartsLabelList, Legend as RechartsLegend, Pie as RechartsPie, ResponsiveContainer as RechartsResponsiveContainer, Tooltip as RechartsTooltip, XAxis as RechartsXAxis, YAxis as RechartsYAxis } from "recharts"
 import NextHead from "next/head"
 
-const RechartsFunnelChart = dynamic(() => import('recharts').then((mod) => mod.FunnelChart), { ssr: false });
 const RechartsPieChart = dynamic(() => import('recharts').then((mod) => mod.PieChart), { ssr: false });
 const RechartsBarChart = dynamic(() => import('recharts').then((mod) => mod.BarChart), { ssr: false });
+const RechartsFunnelChart = dynamic(() => import('recharts').then((mod) => mod.FunnelChart), { ssr: false });
 
 
 export function Fragment_ac0b06893fc1b15016f3e0532508036d () {
@@ -47,16 +47,6 @@ export function Fragment_ac0b06893fc1b15016f3e0532508036d () {
   )
 }
 
-const pulse = keyframes`
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-`
-
-
 export function Fragment_e9a05c105aa9215aeba52aeec8fe2e76 () {
   const state = useContext(StateContexts.state)
   const [addEvents, connectErrors] = useContext(EventLoopContext);
@@ -76,6 +66,16 @@ export function Fragment_e9a05c105aa9215aeba52aeec8fe2e76 () {
 </Fragment>
   )
 }
+
+const pulse = keyframes`
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+`
+
 
 export default function Component() {
 
@@ -143,6 +143,9 @@ export default function Component() {
 </RadixThemesFlex>
 </RadixThemesContainer>
   <RadixThemesContainer css={{"height": "50px"}}/>
+  <RadixThemesText as={`p`}>
+  {`All information below is in percent (%) and from https://www.w3schools.com/browsers/`}
+</RadixThemesText>
   <RadixThemesContainer css={{"padding": "1em"}}>
   <RadixThemesFlex align={`center`} wrap={`wrap`}>
   <RadixThemesFlex align={`start`} direction={`column`} gap={`2`}>

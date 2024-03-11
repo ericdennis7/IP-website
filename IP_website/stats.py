@@ -88,6 +88,7 @@ def stats_page():
             padding_right="1em"
         ),
         rx.container(height="50px"),
+        rx.text("All information below is in percent (%) and from https://www.w3schools.com/browsers/"),
         rx.container(
             rx.flex(
                 rx.vstack(
