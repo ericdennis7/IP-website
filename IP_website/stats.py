@@ -88,8 +88,8 @@ def stats_page():
             padding_right="1em"
         ),
         rx.container(height="50px"),
-        rx.text("All information below is in percent (%) and from https://www.w3schools.com/browsers/"),
         rx.container(
+            rx.text("All information below is in percent (%) and from https://www.w3schools.com/browsers/", margin_bottom="20px"),
             rx.flex(
                 rx.vstack(
                     rx.heading("What's an OS and what are the top OS's?", size="7"),
