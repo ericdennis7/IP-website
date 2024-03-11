@@ -10,11 +10,12 @@ import { Button as RadixThemesButton, Container as RadixThemesContainer, Dialog 
 import env from "/env.json"
 import NextLink from "next/link"
 import dynamic from "next/dynamic"
-import { Funnel as RechartsFunnel, LabelList as RechartsLabelList, Pie as RechartsPie, ResponsiveContainer as RechartsResponsiveContainer, Tooltip as RechartsTooltip } from "recharts"
+import { Bar as RechartsBar, Funnel as RechartsFunnel, LabelList as RechartsLabelList, Legend as RechartsLegend, Pie as RechartsPie, ResponsiveContainer as RechartsResponsiveContainer, Tooltip as RechartsTooltip, XAxis as RechartsXAxis, YAxis as RechartsYAxis } from "recharts"
 import NextHead from "next/head"
 
 const RechartsFunnelChart = dynamic(() => import('recharts').then((mod) => mod.FunnelChart), { ssr: false });
 const RechartsPieChart = dynamic(() => import('recharts').then((mod) => mod.PieChart), { ssr: false });
+const RechartsBarChart = dynamic(() => import('recharts').then((mod) => mod.BarChart), { ssr: false });
 
 
 export function Fragment_ac0b06893fc1b15016f3e0532508036d () {
@@ -116,7 +117,7 @@ export default function Component() {
 </RadixThemesDropdownMenu.Root>
 </RadixThemesFlex>
 </RadixThemesFlex>
-  <Fragment>
+  <Fragment css={{"marginBottom": "100px"}}>
   <RadixThemesContainer css={{"backgroundColor": "#f4f5f8", "padding": "50px 1em 100px 1em"}}>
   <RadixThemesHeading align={`left`} css={{"marginTop": "10vh"}} size={`9`}>
   {`Get your ping from anywhere! 🌎`}
@@ -143,10 +144,10 @@ export default function Component() {
 </RadixThemesContainer>
   <RadixThemesContainer css={{"height": "50px"}}/>
   <RadixThemesContainer css={{"padding": "1em"}}>
-  <RadixThemesFlex align={`start`} direction={`row`} gap={`2`}>
+  <RadixThemesFlex align={`center`} wrap={`wrap`}>
   <RadixThemesFlex align={`start`} direction={`column`} gap={`2`}>
   <RadixThemesHeading size={`7`}>
-  {`What's an OS?`}
+  {`What's an OS and what are the top OS's?`}
 </RadixThemesHeading>
   <RadixThemesContainer css={{"height": "20px"}}/>
   <RadixThemesText as={`p`} css={{"wrap": "wrap", "width": "100%"}}>
@@ -155,12 +156,13 @@ export default function Component() {
                         It acts as an intermediary between computer hardware and the applications that run on it. The OS handles tasks 
                         such as managing memory, controlling peripheral devices, facilitating communication between software applications, 
                         and providing a user interface. Popular examples of operating systems include Microsoft Windows, macOS, Linux, and Android.
+                        As of 2024, the top operating systems are:
                         `}
 </RadixThemesText>
 </RadixThemesFlex>
-  <RadixThemesContainer css={{"height": "7px"}}/>
+  <RadixThemesContainer css={{"height": "20px"}}/>
   <RadixThemesContainer css={{"align": "center", "margin": "auto"}}>
-  <RechartsFunnelChart height={250} width={350}>
+  <RechartsFunnelChart css={{"marginTop": "50px"}} height={250} width={350}>
   <RechartsFunnel data={[{"value": 38.2, "name": "Win10", "fill": "#004fe1"}, {"value": 30.6, "name": "Win11", "fill": "#004fe1"}, {"value": 18.0, "name": "Mobile", "fill": "#81b662"}, {"value": 8.4, "name": "Mac", "fill": "#7e499d"}, {"value": 4.1, "name": "Linux", "fill": "#ffcc33"}, {"value": 1.3, "name": "Win7", "fill": "#004fe1"}, {"value": 0.5, "name": "Win8", "fill": "#004fe1"}]} dataKey={`value`}>
   <RechartsLabelList dataKey={`name`} fill={`#000`} position={`right`} stroke={`none`}/>
   <RechartsLabelList dataKey={`name`} fill={`#000`} position={`right`} stroke={`none`}/>
@@ -172,15 +174,10 @@ export default function Component() {
 </RadixThemesContainer>
   <RadixThemesContainer css={{"height": "50px"}}/>
   <RadixThemesContainer css={{"padding": "1em"}}>
-  <RadixThemesFlex align={`start`} direction={`row`} gap={`2`}>
-  <RechartsResponsiveContainer height={`100%`} minHeight={100} minWidth={200} width={`100%`}>
-  <RechartsPieChart height={`100%`} width={`100%`}>
-  <RechartsPie cx={`50%`} cy={`50%`} data={[{"value": 68.8, "name": "Chrome", "fill": "#004fe1"}, {"value": 14.9, "name": "Safari", "fill": "#004fe1"}, {"value": 4.2, "name": "Internet Explorer/Edge", "fill": "#81b662"}, {"value": 3.3, "name": "Firefox", "fill": "#7e499d"}, {"value": 1.3, "name": "Other", "fill": "#ffcc33"}]} dataKey={`value`} fill={`#8884d8`} label={true} nameKey={`name`}/>
-</RechartsPieChart>
-</RechartsResponsiveContainer>
-  <RadixThemesFlex align={`start`} css={{"paddingLeft": "20px"}} direction={`column`} gap={`2`}>
+  <RadixThemesFlex align={`center`} wrap={`wrap`}>
+  <RadixThemesFlex align={`start`} direction={`column`} gap={`2`}>
   <RadixThemesHeading size={`7`}>
-  {`What's a web browser?`}
+  {`What's a web browser and what's the top browsers?`}
 </RadixThemesHeading>
   <RadixThemesContainer css={{"height": "20px"}}/>
   <RadixThemesText as={`p`} css={{"wrap": "wrap", "width": "100%"}}>
@@ -194,11 +191,45 @@ export default function Component() {
   {` 
                         Examples of popular web browsers include Google Chrome, Mozilla Firefox, Microsoft Edge, Safari, and Opera. Each browser 
                         may have its unique features, but they all serve the primary purpose of allowing users to interact with and explore content 
-                        on the Internet.
+                        on the Internet. As of 2024, the top browsers are:
                         `}
 </RadixThemesText>
 </RadixThemesFlex>
+  <RechartsResponsiveContainer height={275} width={`100%`}>
+  <RechartsPieChart height={`100%`} width={`100%`}>
+  <RechartsPie cx={`50%`} cy={`50%`} data={[{"value": 68.8, "name": "Chrome", "fill": "green"}, {"value": 14.9, "name": "Safari", "fill": "red"}, {"value": 4.2, "name": "Internet Explorer/Edge", "fill": "blue"}, {"value": 3.3, "name": "Firefox", "fill": "orange"}, {"value": 1.3, "name": "Other", "fill": "purple"}]} dataKey={`value`} fill={`#8884d8`} label={true} nameKey={`name`}/>
+  <RechartsTooltip/>
+  <RechartsLegend/>
+</RechartsPieChart>
+</RechartsResponsiveContainer>
   <RadixThemesContainer css={{"height": "7px"}}/>
+</RadixThemesFlex>
+</RadixThemesContainer>
+  <RadixThemesContainer css={{"height": "50px"}}/>
+  <RadixThemesContainer css={{"padding": "1em"}}>
+  <RadixThemesFlex align={`center`} wrap={`wrap`}>
+  <RadixThemesFlex align={`start`} direction={`column`} gap={`2`}>
+  <RadixThemesHeading size={`7`}>
+  {`What are the top screen sizes?`}
+</RadixThemesHeading>
+  <RadixThemesContainer css={{"height": "20px"}}/>
+  <RadixThemesText as={`p`} css={{"wrap": "wrap", "width": "100%"}}>
+  {`                        
+                        Screen resolution refers to the number of pixels that a display can show horizontally and vertically. It is typically 
+                        represented as the width x height in pixels. For example, a screen resolution of 1920 x 1080 means the display has 1920 
+                        pixels in width and 1080 pixels in height. Screen resolution is an important factor in determining the clarity and 
+                        detail of images and text on a display. Higher resolutions generally result in sharper and more detailed visuals.
+                        `}
+</RadixThemesText>
+</RadixThemesFlex>
+  <RadixThemesContainer css={{"height": "20px"}}/>
+  <RechartsResponsiveContainer height={275} width={`100%`}>
+  <RechartsBarChart css={{"marginTop": "20px"}} data={[{"value": 47.2, "name": "Other High", "fill": "#40739e"}, {"value": 18.4, "name": "1920x1080", "fill": "#44bd32"}, {"value": 18.2, "name": "1366x768", "fill": "#e1b12c"}, {"value": 1.1, "name": "1280x1024", "fill": "#8c7ae6"}, {"value": 1.0, "name": "1280x800", "fill": "#c23616"}, {"value": 0.7, "name": "1024x768", "fill": "#718093"}, {"value": 0.7, "name": "Other Lower", "fill": "##2f3640"}]} height={`100%`} width={`100%`}>
+  <RechartsBar dataKey={`value`} fill={`#8884d8`} stroke={`#8884d8`}/>
+  <RechartsXAxis dataKey={`name`}/>
+  <RechartsYAxis/>
+</RechartsBarChart>
+</RechartsResponsiveContainer>
 </RadixThemesFlex>
 </RadixThemesContainer>
 </Fragment>

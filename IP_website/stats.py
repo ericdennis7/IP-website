@@ -29,11 +29,21 @@ os_data = [
 ]
 
 browser_data = [
-    {"value": 68.8, "name": "Chrome", "fill": "#004fe1"},
-    {"value": 14.9, "name": "Safari", "fill": "#004fe1"},
-    {"value": 4.2, "name": "Internet Explorer/Edge", "fill": "#81b662"},
-    {"value": 3.3, "name": "Firefox", "fill": "#7e499d"},
-    {"value": 1.3, "name": "Other", "fill": "#ffcc33"},
+    {"value": 68.8, "name": "Chrome", "fill": "green"},
+    {"value": 14.9, "name": "Safari", "fill": "red"},
+    {"value": 4.2, "name": "Internet Explorer/Edge", "fill": "blue"},
+    {"value": 3.3, "name": "Firefox", "fill": "orange"},
+    {"value": 1.3, "name": "Other", "fill": "purple"},
+]
+
+screen_data = [
+    {"value": 47.2, "name": "Other High", "fill": "#40739e"},
+    {"value": 18.4, "name": "1920x1080", "fill": "#44bd32"},
+    {"value": 18.2, "name": "1366x768", "fill": "#e1b12c"},
+    {"value": 1.1, "name": "1280x1024", "fill": "#8c7ae6"},
+    {"value": 1.0, "name": "1280x800", "fill": "#c23616"},
+    {"value": 0.7, "name": "1024x768", "fill": "#718093"},
+    {"value": 0.7, "name": "Other Lower", "fill": "##2f3640"},
 ]
 
 def stats_page():
@@ -79,19 +89,20 @@ def stats_page():
         ),
         rx.container(height="50px"),
         rx.container(
-            rx.hstack(
+            rx.flex(
                 rx.vstack(
-                    rx.heading("What's an OS?", size="7"),
+                    rx.heading("What's an OS and what are the top OS's?", size="7"),
                     rx.container(height="20px"),
                     rx.text("""
                         An operating system (OS) is a software that manages computer hardware and provides common services for computer programs. 
                         It acts as an intermediary between computer hardware and the applications that run on it. The OS handles tasks 
                         such as managing memory, controlling peripheral devices, facilitating communication between software applications, 
                         and providing a user interface. Popular examples of operating systems include Microsoft Windows, macOS, Linux, and Android.
+                        As of 2024, the top operating systems are:
                         """,
                         wrap="wrap", width="100%"),
                     ),
-                rx.container(height="7px"),
+                rx.container(height="20px"),
                 rx.container(
                     rx.recharts.funnel_chart(
                         rx.recharts.funnel(
@@ -113,29 +124,21 @@ def stats_page():
                         rx.recharts.graphing_tooltip(),
                         width=350,
                         height=250,
+                        margin_top="50px"
                     ),
                     align="center",
                     margin="auto"
                 ),
+                wrap="wrap",
+                align="center"
             ),
             padding="1em"
         ),
         rx.container(height="50px"),
         rx.container(
-            rx.hstack(
-                rx.recharts.pie_chart(
-                    rx.recharts.pie(
-                        data=browser_data,
-                        data_key="value",
-                        name_key="name",
-                        cx="50%",
-                        cy="50%",
-                        fill="#8884d8",
-                        label=True,
-                    )
-                ),
+            rx.flex(
                 rx.vstack(
-                    rx.heading("What's a web browser?", size="7"),
+                    rx.heading("What's a web browser and what's the top browsers?", size="7"),
                     rx.container(height="20px"),
                     rx.text("""                        
                         A web browser is a software application that allows users to access and navigate the World Wide Web (WWW) to view web pages, 
@@ -146,13 +149,61 @@ def stats_page():
                     rx.text(""" 
                         Examples of popular web browsers include Google Chrome, Mozilla Firefox, Microsoft Edge, Safari, and Opera. Each browser 
                         may have its unique features, but they all serve the primary purpose of allowing users to interact with and explore content 
-                        on the Internet.
+                        on the Internet. As of 2024, the top browsers are:
                         """,
                         wrap="wrap", width="100%"),
-                    padding_left="20px"
                     ),
+                rx.recharts.pie_chart(
+                    rx.recharts.pie(
+                        data=browser_data,
+                        data_key="value",
+                        name_key="name",
+                        cx="50%",
+                        cy="50%",
+                        fill="#8884d8",
+                        label=True,
+                    ),
+                    rx.recharts.graphing_tooltip(),
+                    rx.recharts.legend(),
+                    width="100%",
+                    height=275
+                ),
                 rx.container(height="7px"),
+                wrap="wrap",
+                align="center"
             ),
             padding="1em"
         ),
+        rx.container(height="50px"),
+        rx.container(
+            rx.flex(
+                rx.vstack(
+                    rx.heading("What are the top screen sizes?", size="7"),
+                    rx.container(height="20px"),
+                    rx.text("""                        
+                        Screen resolution refers to the number of pixels that a display can show horizontally and vertically. It is typically 
+                        represented as the width x height in pixels. For example, a screen resolution of 1920 x 1080 means the display has 1920 
+                        pixels in width and 1080 pixels in height. Screen resolution is an important factor in determining the clarity and 
+                        detail of images and text on a display. Higher resolutions generally result in sharper and more detailed visuals.
+                        """,
+                        wrap="wrap", width="100%"),
+                    ),
+                rx.container(height="20px"),
+                    rx.recharts.bar_chart(
+                        rx.recharts.bar(
+                            data_key="value", stroke="#8884d8", fill="#8884d8"
+                        ),
+                        rx.recharts.x_axis(data_key="name"),
+                        rx.recharts.y_axis(),
+                        data=screen_data,
+                        width="100%",
+                        height=275,
+                        margin_top="20px"
+                    ),
+                wrap="wrap",
+                align="center"
+            ),
+            padding="1em"
+        ),
+        margin_bottom="100px"
     )
