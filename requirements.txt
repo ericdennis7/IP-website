@@ -1,5 +1,6 @@
-reflex==0.4.2
+reflex
 myipaddress
+pandas
+trio
 pycountry
 asyncio
-trio

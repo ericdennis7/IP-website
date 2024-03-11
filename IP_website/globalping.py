@@ -7,14 +7,12 @@
 
 import time
 import json
-import folium
 import asyncio
 import requests
 import pycountry
 import pandas as pd
 import reflex as rx
 import myipaddress as myip
-import plotly.express as px
 
 
 def globalping():

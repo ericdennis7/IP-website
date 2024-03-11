@@ -128,7 +128,7 @@ def ip_address_page():
                                 rx.container(height="5px"),
                                 rx.text(f"{identity_text}", text_align="center", color=f"{vpn_status_color}", weight="bold", size="6"),
                                 rx.container(height="5px"),
-                                rx.button(f"{button_text}", background_color=f"{vpn_status_color}"),
+                                #rx.button(f"{button_text}", background_color=f"{vpn_status_color}"),
                                 align="center"
                             ),
                             border_radius="0px 0px 0px 7px",
