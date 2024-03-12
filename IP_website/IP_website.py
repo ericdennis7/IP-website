@@ -71,6 +71,6 @@ def internet_stats_page():
 ### CREATING THE APP ###
 
 app = rx.App(theme=rx.theme(accent_color="grass"), style=style)
-app.add_page(ip_page, route="/")
-app.add_page(global_ping_page, route="/globalping")
-app.add_page(internet_stats_page, route="/internetstats")
+app.add_page(ip_page, route="/", title="My IP Address")
+app.add_page(global_ping_page, route="/globalping", title="My Globalping")
+app.add_page(internet_stats_page, route="/internetstats", title="Internet Stats")
