@@ -13,9 +13,39 @@ import dynamic from "next/dynamic"
 import { Bar as RechartsBar, Funnel as RechartsFunnel, LabelList as RechartsLabelList, Legend as RechartsLegend, Pie as RechartsPie, ResponsiveContainer as RechartsResponsiveContainer, Tooltip as RechartsTooltip, XAxis as RechartsXAxis, YAxis as RechartsYAxis } from "recharts"
 import NextHead from "next/head"
 
-const RechartsPieChart = dynamic(() => import('recharts').then((mod) => mod.PieChart), { ssr: false });
 const RechartsBarChart = dynamic(() => import('recharts').then((mod) => mod.BarChart), { ssr: false });
 const RechartsFunnelChart = dynamic(() => import('recharts').then((mod) => mod.FunnelChart), { ssr: false });
+const RechartsPieChart = dynamic(() => import('recharts').then((mod) => mod.PieChart), { ssr: false });
+
+
+export function Fragment_966c0378eb9d65bdfb5286644be9b831 () {
+  const [addEvents, connectErrors] = useContext(EventLoopContext);
+  const state = useContext(StateContexts.state)
+
+
+  return (
+    <Fragment>
+  {isTrue(((!state.is_hydrated) || (connectErrors.length > 0))) ? (
+  <Fragment>
+  <LucideWifiOffIcon css={{"color": "crimson", "zIndex": 9999, "position": "fixed", "bottom": "30px", "right": "30px", "animation": `${pulse} 1s infinite`}} size={32}>
+  {`wifi_off`}
+</LucideWifiOffIcon>
+</Fragment>
+) : (
+  <Fragment/>
+)}
+</Fragment>
+  )
+}
+
+const pulse = keyframes`
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+`
 
 
 export function Fragment_ac0b06893fc1b15016f3e0532508036d () {
@@ -39,36 +69,6 @@ export function Fragment_ac0b06893fc1b15016f3e0532508036d () {
 </RadixThemesText>
 </RadixThemesDialog.Content>
 </RadixThemesDialog.Root>
-</Fragment>
-) : (
-  <Fragment/>
-)}
-</Fragment>
-  )
-}
-
-const pulse = keyframes`
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-`
-
-
-export function Fragment_966c0378eb9d65bdfb5286644be9b831 () {
-  const [addEvents, connectErrors] = useContext(EventLoopContext);
-  const state = useContext(StateContexts.state)
-
-
-  return (
-    <Fragment>
-  {isTrue(((!state.is_hydrated) || (connectErrors.length > 0))) ? (
-  <Fragment>
-  <LucideWifiOffIcon css={{"color": "crimson", "zIndex": 9999, "position": "fixed", "bottom": "30px", "right": "30px", "animation": `${pulse} 1s infinite`}} size={32}>
-  {`wifi_off`}
-</LucideWifiOffIcon>
 </Fragment>
 ) : (
   <Fragment/>
@@ -225,7 +225,7 @@ export default function Component() {
 </Fragment>
   <NextHead>
   <title>
-  {`Reflex App`}
+  {`Internet Stats`}
 </title>
   <meta content={`A Reflex app.`} name={`description`}/>
   <meta content={`favicon.ico`} property={`og:image`}/>
